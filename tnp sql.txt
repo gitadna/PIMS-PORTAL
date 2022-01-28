@@ -1,0 +1,5 @@
+ 'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'placementPortal$tnpportal',
+        'USER': 'placementPortal',
+        'PASSWORD': 'placement123',
+        'HOST': 'placementPortal.mysql.pythonanywhere-services.com',

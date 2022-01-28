@@ -1,0 +1,146 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>TPO Admin | Sorted Students</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- first jQuery -->
+        <!-- All Plugin Css -->
+		<link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+
+		<!-- Style & Common Css -->
+		<link rel="stylesheet" href="{% static 'css/common.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+
+
+    <body>
+        {% include "admin_dashboard.html" %}
+        <form action="/tnp_admin/sorting_student" method="post">
+      {% csrf_token %}
+            <div class="input-group">
+    <select name="student_filter" onchange="submit()" class="input-group form-control" style="margin:30px;width:56%;cursor:pointer;">
+    <option value="" disabled selected>Sort By</option>
+    <option value="Gender">Gender</option>
+    <option value="Branch">Branch</option>
+    <option value="Percentage_low">Percentage : Low to High </option>
+    <option value="Percentage_high">Percentage : Hight to Low </option>
+    </select>
+    <div class="input-group" style="width:40%;margin:30px;">
+    <!-- <input type="submit" value="submit" onclick="check(); return false"> -->
+    </div>
+            </div>
+          </form>
+          {% if student_filter == "Percentage_high" %}
+          <center><p style="color: green;letter-spacing: 7.2px;font-size: 20px;"><b> Filtered By: High Aggregate </b></p></center>
+          {%elif student_filter == "Percentage_low"%}
+          <center><p style="color: green;letter-spacing: 7.2px;font-size: 20px;"><b> Filtered By: Low Aggregate </b></p></center>
+          {% else %}
+          <center><p style="color: green;letter-spacing: 7.2px;font-size: 20px;"><b> Filtered By: {{ student_filter }} </b></p></center>
+          {%endif%}
+          {% if student_filter == "Gender" %}
+          {% regroup student_details by gender as studName %}
+          {% for gender in studName %}
+          <div class="table-responsive">
+            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm table1 dt-rsponsive nowrap" style="margin-top:50px;">
+            <thead>
+                <tr>
+                    <th style="color: #DA0833">{{gender.grouper}}</th>
+                    <th style="color: #DA0833">Name</th>
+                  <th style="color: #DA0833">User Id</th>
+                    <th style="color: #DA0833">Gender</th>
+
+                </tr>
+              </thead>
+                <tbody id="myTable">
+              {% for student in gender.list %}
+
+                  <tr>
+                    <th scope="row" width="10%">{{ forloop.counter }}</th>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.user }}</td>
+                    <td>{{ student.gender }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+                {% endfor %}
+
+            {% elif student_filter == "Branch"%}
+            {% regroup student_details by branch as studName %}
+            {% for branch in studName%}
+            <div class="table-responsive">
+            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm table1 dt-rsponsive nowrap" style="margin-top:50px;">
+            <thead>
+                  <tr>
+                      <th style="color: #DA0833">{{branch.grouper}}</th>
+                      <th style="color: #DA0833">Name</th>
+                    <th style="color: #DA0833">User Id</th>
+                      <th style="color: #DA0833">Branch</th>
+                  </tr>
+                </thead>
+                <tbody id="myTable2">
+                {% for student in branch.list %}
+
+                  <tr>
+                    <th scope="row" width="10%">{{ forloop.counter }}</th>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.user }}</td>
+                    <td>{{ student.branch }}</td>
+                </tr>
+
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="table-responsive">
+            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm table1 dt-rsponsive nowrap" style="margin-top:50px;">
+            <thead>
+                  <tr>
+                      <th style="color: #DA0833">#</th>
+                      <th style="color: #DA0833">Name</th>
+                    <th style="color: #DA0833">User Id</th>
+                    <th style="color: #DA0833">Branch</th>
+                      <th style="color: #DA0833">Aggregate</th>
+                  </tr>
+                </thead>
+                <tbody id="myTable3">
+                {% for student in student_details %}
+                  <tr>
+                    <th scope="row" width="10%">{{ forloop.counter }}</th>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.user }}</td>
+                    <td>{{ student.branch }}</td>
+                    <td>{{ student.sperc }}</td>
+                </tr>
+
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+                {%endif%}
+
+
+
+</div>
+<script>
+$(document).ready(function(){
+$('table.table1').DataTable();
+});
+</script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/bootsnav.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+	</body>
+</html>

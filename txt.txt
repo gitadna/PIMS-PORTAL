@@ -1,0 +1,16 @@
+pattern="^[a-zA-Z0-9.]+@somaiya\.edu$"
+
+
+English,Hindi,Marathi
+
+Get Formals
+
+Accenture
+Accenture
+
+4
+7.0
+Information Technology
+COLLEGE CAMPUS
+
+BE IN FORMALS ss

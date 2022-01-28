@@ -1,0 +1,86 @@
+{% load static %}
+
+<html>
+<head>
+
+    <style>
+        @page {
+            size: a4 portrait;
+
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+            }
+        }
+
+th {
+  height: 50px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="header_content">
+        <center>
+            <h1>K.J. Somaiya Institute of Engineering & Information Technology</h1>
+            <p style="font-size:12px;">Accredited by NAAC with "A" grade (3.21 CGPA) for 5 years.</p>
+            <p style="font-size:12px;">Three programs accredited by the National Board of Accreditation.</p>
+            <p style="font-size:12px;">Best College awarded by University of Mumbai, ISTE(MH) and CSI (MUMBAI).</p>
+        </center>
+        </div>
+        <table cellpadding="5">
+            <tr style="color:#da0833;font-size:20px;">
+                <th width="20%">sr.no</th>
+                <th>COMPANY</th>
+                <th>CTC</th>
+                <th>ELIGIBILITY</th>
+
+                <th>STUDENT PLACED</th>
+            </tr>
+
+
+            {% for details in details %}
+            <tr style="text-align:center;font-size:20px;">
+                <td width="20%">{{ forloop.counter }}</td>
+                <td>{{details.comp_name}}</td>
+                <td>{{details.ctc}}</td>
+                <td>{{details.eligibility}} %</td>
+                {% if details.branch == "Information Technology" %}
+                <td>{{it}} IT</td>
+                {%endif%}
+                {%if details.branch == "Computer" %}
+                <td>{{comps}} Comps</td>
+                {%endif%}
+                {%if details.branch == "Electronics & Telecommunication" %}
+                <td>{{extc}} EXTC</td>
+                {%endif%}
+                {%if details.branch == "Electronics" %}
+                <td>{{etrx}} ETRX</td>
+                {%endif%}
+
+</tr>
+{%endfor%}
+
+
+
+
+</body>
+
+
+
+
+
+</html>
