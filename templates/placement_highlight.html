@@ -2,6 +2,25 @@
 {% load static %}
 <html class="no-js" lang="en">
     <head>
+      
+<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'http://localhost/Open-Web-Analytics-1.7.3/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', 'cea78186b3a1a9874b7bcad9241409d6']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+
+(function() {
+    var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+    owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+    _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+    var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+</script>
+<!-- End Open Web Analytics Code -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>KJSIEIT | Placement</title>
@@ -45,29 +64,29 @@
                                                     <div class="row">
 
 													<div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-graduation-cap fa-fw"></i> Placement Highlights (Current Year)
+								<div class="panel-heading" style="font-size: 30px;color: maroon;>
+									<i class="" ></i> Placement Highlights (Current Year)
 								</div>
 														<br>
 														<center><div id="chartdivs"></div></center>
 											</div>
 
 														<div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-graduation-cap fa-fw"></i> Placement Highlights (Previous Year)
+								<div class="panel-heading" style="font-size: 30px;color: maroon;>
+									<i class="" ></i> Placement Highlights (Previous Year)
 								</div>
 														<div id="chartdiv"></div>
 											</div>
                                                         <div class="basic-information">
                                 <div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-leaf fa-fw"></i> Carrier Support Opportunities:
+								<div class="panel-heading"style="font-size: 30px;color: maroon;">
+									<i class=""></i> Carrier Support Opportunities:
 								</div>
 													<!-- /.panel-heading -->
 								<div class="panel-body">
 
 								<ul>
-									<li>Expert Talks by National , International Speakers.</li>
+									<li >Expert Talks by National , International Speakers.</li>
 									<li>Interview Guidance</li>
 									<li>Center of Excellence</li>
 									<li>Robotic Automation</li>
@@ -82,8 +101,8 @@
 							</div>
 
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-cog fa-fw"></i> Placement Process:
+								<div class="panel-heading" style="font-size: 30px;color: maroon;>
+									<i class=""></i> Placement Process:
 								</div>
 													<!-- /.panel-heading -->
 								<div class="panel-body">
@@ -116,85 +135,18 @@
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/moonrisekingdom.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
 <!-- Chart code -->
 <script>
-// am4core.ready(function() {
-
-// // Themes begin
-// am4core.useTheme(am4themes_material);
-// am4core.useTheme(am4themes_animated);
-// // Themes end
-
-// // Create chart instance
-// var chart = am4core.create("chartdiv", am4charts.XYChart3D);
-
-// // Add data
-// chart.data = [{
-//   "department": "IT",
-//   "placed": 20
-// }, {
-//   "department": "EXTC",
-//   "placed": 40
-// }, {
-//   "department": "COMPS",
-//   "placed": 60
-// }, {
-//   "department": "ETRX",
-//   "placed": 30
-// }];
-
-// // Add and configure Series
-// // 
-// let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-// categoryAxis.dataFields.category = "department";
-// // valueAxis.title="department";
-// // valueAxis.title.fontWeight="bold";
-// categoryAxis.renderer.labels.template.rotation = 270;
-// categoryAxis.renderer.labels.template.hideOversized = false;
-// categoryAxis.renderer.minGridDistance = 20;
-// categoryAxis.renderer.labels.template.horizontalCenter = "right";
-// categoryAxis.renderer.labels.template.verticalCenter = "middle";
-// categoryAxis.tooltip.label.rotation = 270;
-// categoryAxis.tooltip.label.horizontalCenter = "right";
-// categoryAxis.tooltip.label.verticalCenter = "middle";
-
-// let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-// valueAxis.title.text = "Students Placed";
-// valueAxis.title.fontWeight = "bold";
-
-// // Create series
-// var series = chart.series.push(new am4charts.ColumnSeries3D());
-// series.dataFields.valueY = "placed";
-// series.dataFields.categoryX = "department";
-// series.name = "Placed";
-// series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
-// series.columns.template.fillOpacity = .8;
-
-// var columnTemplate = series.columns.template;
-// columnTemplate.strokeWidth = 2;
-// columnTemplate.strokeOpacity = 1;
-// columnTemplate.stroke = am4core.color("#FFFFFF");
-
-// columnTemplate.adapter.add("fill", function(fill, target) {
-//   return chart.colors.getIndex(target.dataItem.index);
-// })
-
-// columnTemplate.adapter.add("stroke", function(stroke, target) {
-//   return chart.colors.getIndex(target.dataItem.index);
-// })
-
-// chart.cursor = new am4charts.XYCursor();
-// chart.cursor.lineX.strokeOpacity = 0;
-// chart.cursor.lineY.strokeOpacity = 0;
-
-// }); 
-// end am4core.ready()
 am4core.ready(function() {
 
 // Themes begin
-am4core.useTheme(am4themes_material);
+
+//am4core.useTheme(am4themes_moonrisekingdom);
+//am4core.useTheme(am4themes_spiritedaway);
+am4core.useTheme(am4themes_moonrisekingdom);
 am4core.useTheme(am4themes_animated);
 // Themes end
 
@@ -213,9 +165,11 @@ xAxis.dataFields.category = 'category'
 xAxis.renderer.cellStartLocation = 0.1
 xAxis.renderer.cellEndLocation = 0.9
 xAxis.renderer.grid.template.location = 0;
-
-var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-yAxis.min = 0;
+let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  valueAxis.title.text = "Student Placed (%)";
+  valueAxis.title.fontWeight = "bold";
+    valueAxis.min = 0;
+    valueAxis.max = 100;
 
 function createSeries(value, name) {
     var series = chart.series.push(new am4charts.ColumnSeries())
@@ -228,9 +182,11 @@ function createSeries(value, name) {
 
     var bullet = series.bullets.push(new am4charts.LabelBullet())
     bullet.interactionsEnabled = false
-    bullet.dy = 30;
-    // bullet.label.text = '{valueY}'
-    // bullet.label.fill = am4core.color('#ffffff')
+    bullet.dy = 20;
+
+
+   // bullet.label.text = '{valueY}'
+//    bullet.label.fill = am4core.color('#ffffff')
 
     return series;
 }
@@ -238,39 +194,40 @@ function createSeries(value, name) {
 chart.data = [
     {
         category: 'COMPS',
-        first: 69.23,
-        second: 100,
-        third: 70.31
-		// fourth: 3
+        first: 100,
+        second: 70.31,
+        third: 69.23,
+        forth:80
     },
     {
         category: 'IT',
-        first: 100,
-        second: 100,
-        third: 70.9
-		// fourth: 3
+        first: 81.48,
+        second: 86.44,
+        third: 92.72,
+        forth:91.25
     },
     {
         category: 'EXTC',
-        first: 43,
+        first: 77.89,
         second: 68.6,
-        third: 77.89
-		// fourth: 3
+        third: 43,
+        forth: 40
     },
     {
         category: 'ETRX',
-        first: 88.23,
+        first: 100,
         second: 100,
-        third: 100
-		// fourth: 30
+        third: 88.23,
+        forth: 30
     }
 ]
 
 
-createSeries('first', '2019-20');
-createSeries('second', '2018-17');
-createSeries('third', '2017-16');
-// createSeries('fourth', '2016-15');
+createSeries('first', '2017-18');
+createSeries('second', '2018-19');
+createSeries('third', '2019-20');
+createSeries('forth','2020-21');
+
 
 function arrangeColumns() {
 
@@ -305,19 +262,23 @@ function arrangeColumns() {
 
                 series.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
                 series.bulletsContainer.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+
             })
+
+
         }
     }
 }
 
-});
+}); // end am4core.ready()
 </script>
 
 <script>
 am4core.ready(function() {
 
 // Themes begin
-am4core.useTheme(am4themes_material);
+//am4core.useTheme(am4themes_material);
+am4core.useTheme(am4themes_moonrisekingdom);
 am4core.useTheme(am4themes_animated);
 // Themes end
 
@@ -329,20 +290,39 @@ var etrxs = document.getElementById("etrx").value;
 var compss = document.getElementById("comps").value;
 
 // Add data
-chart.data = [{
-  "department": "IT",
-  "placed": its
-}, {
-  "department": "EXTC",
-  "placed": extcs
-}, {
-  "department": "COMPS",
-  "placed": compss
-}, {
-  "department": "ETRX",
-  "placed": etrxs
-}];
 
+ chart.data = [
+          {
+            department: "IT",
+            placed: 63,
+          },
+          {
+            department: "COMPS",
+            placed: 46,
+          },
+          {
+            department: "EXTC",
+            placed: 37,
+          },
+          {
+            department: "ETRX",
+            placed: 14,
+          },
+];
+
+// chart.data = [{
+//   "department": "IT",
+//   "placed": its
+// }, {
+//   "department": "EXTC",
+//   "placed": extcs
+// }, {
+//   "department": "COMPS",
+//   "placed": compss
+// }, {
+//   "department": "ETRX",
+//   "placed": etrxs
+// }];
 // Create axes
 let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "department";
@@ -356,8 +336,9 @@ categoryAxis.tooltip.label.horizontalCenter = "right";
 categoryAxis.tooltip.label.verticalCenter = "middle";
 
 let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-valueAxis.title.text = "Students Placed";
+valueAxis.title.text = "Students Placed (%)";
 valueAxis.title.fontWeight = "bold";
+valueAxis.min = 0;
 
 // Create series
 var series = chart.series.push(new am4charts.ColumnSeries3D());

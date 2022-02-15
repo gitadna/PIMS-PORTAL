@@ -2,7 +2,26 @@
 {% load static %}
 <html class="no-js" lang="en">
     <head>
-        <div style="background-color:white;">
+
+<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'http://localhost/Open-Web-Analytics-1.7.3/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', 'cea78186b3a1a9874b7bcad9241409d6']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+
+(function() {
+    var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+    owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+    _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+    var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+</script>
+<!-- End Open Web Analytics Code -->
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>KJSIEIT | Placement Portal</title>
@@ -16,18 +35,13 @@
 		<link rel="stylesheet" href="{% static 'css/common.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
         <style>
-        body{
-            background-color:red;
-        }
+
 			.header-section{
-				height: 500px;
 				width: 100%;
 				opacity: 80%;
-				background:white;
-				background-size: cover;
 			}
 			.top-logo{
-				max-width: 4%;
+				max-width: 5%;
 				margin-left: 12%;
 			}
 			.right{
@@ -38,6 +52,12 @@
 				margin-top: -90px;
 				font-size: 25px;
 				line-height: 21pt;
+			}
+			.content{
+			    color: #911717;
+			    margin-top: 6%;
+			    font-size:50px;
+			    text-align:center;
 			}
 			@media only screen and (max-width: 982px){
 				.top-content{
@@ -52,13 +72,17 @@
 					margin-left: 61%;
     				margin-top: -24%;
 				}
+				.content{
+				    text-align:center;
+				    font-size:30px;
+				}
 
 			}
 			@media only screen and (max-width: 720px){
-				.text-center {
+				.content {
     			text-align: center;
-   			 	font-size: 10px;
-    			line-height: 12pt;
+   			 	font-size: 22px;
+    			line-height: 23pt;
 			}
 			}
 
@@ -71,25 +95,20 @@
 
     	{% include "home_dashboard.html" %}
 
-		<!-- Main jumbotron for a primary marketing message or call to action
-		<section class="main-banner" style="height:200px; background:#242c36 url(static/img/it.jpg) no-repeat">
-		</section> -->
+		<!-- Main jumbotron for a primary marketing message or call to action-->
+
 		<section class="header-section">
-		<!-- <section class="main-banner"> -->
-
 			<div class="center-div">
-
-				<img src="{% static 'img/somaiya_logo.png' %}" class="top-logo" alt="kjsieit logo">
+			    <img src="{% static 'img/somaiya_logo.png' %}" class="top-logo" alt="kjsieit logo">
 				<img src="{% static 'img/logo2.jpg' %}" class="top-logo right" alt="">
 				<div class="top-content">
 				<h1 class="font-weight-bold text-center top-content">K. J. Somaiya Institute of Engineering and Information Technology,  Sion,  Mumbai</h1></div>
-				<p class="text-center" style="color: black;"> Accredited with 'A' Grade by NAAC (3.21 CGPA) <br>
-					Three Programs Accredited by National Board of Accrediation <br>
-					Best College Award by University of Mumbai (Urban Region), ISTE (MH), CSI (Mumbai)</p>
+				<p class="text-center" style="color: black;font-weight:500;">An Autonomous Institute Affiliated to the University of Mumbai<br>
+				     Accredited with 'A' Grade by NAAC and for 3 Programs by NBA, Approved by AICTE, New Delhi <br></p>
 
-				<h1 class="font-weight-bold text-center" style="color: #911717; margin-top: 10%;">Training and Placement Portal</h1>
-				<p class="text-center" style="color: #911717;font-weight: 500;font-size: 2em;"><strong>(TPO)</strong></p>
-				<!-- <section class="main-banner" style="height:200px; background:#242c36 url(static/img/it.jpg) no-repeat"> -->
+
+				<h1 class="font-weight-bold content">Placement Information Management System<br>(PIMS)</h1>
+
 			</div>
 
 		</section>
@@ -124,35 +143,35 @@
 		</section>
 
 		<section class="counter">
-			<div class="container">
-				<div class="col-md-3 col-sm-3">
-					<div class="counter-text">
+			<div class="container" style="background-color:#911717;">
+				<div class="col-md-3 col-sm-3 " style="background-color:#911717;">
+					<div class="counter-text" style="background-color:#911717;">
 						<span aria-hidden="true" class="icon-profile-male"></span>
-						<a href="https://kjsieit.s3.ap-south-1.amazonaws.com/Placements/placement++process.pdf" target="_blank" style="color:white;">
+						<a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Signup for interested students</p></a>
 					</div>
 				</div>
 
-				<div class="col-md-3 col-sm-3">
-					<div class="counter-text">
+				<div class="col-md-3 col-sm-3" style="background-color:#911717;" >
+					<div class="counter-text" style="background-color:#911717;">
 						<span class="box1"><span aria-hidden="true" class="	fa fa-comments-o"></span></span>
-					    <a href="https://kjsieit.s3.ap-south-1.amazonaws.com/Placements/placement++process.pdf" target="_blank" style="color:white;">
+					    <a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Pre Placement Talk</p></a>
 					</div>
 				</div>
 
-				<div class="col-md-3 col-sm-3">
-					<div class="counter-text">
+				<div class="col-md-3 col-sm-3" style="background-color:#911717;">
+					<div class="counter-text" style="background-color:#911717;">
 						<span class="box1"><span aria-hidden="true" class="icon-search"></span></span>
-						<a href="https://kjsieit.s3.ap-south-1.amazonaws.com/Placements/placement++process.pdf" target="_blank" style="color:white;">
+						<a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Selection Process</p></a>
 					</div>
 				</div>
 
-				<div class="col-md-3 col-sm-3">
-					<div class="counter-text">
+				<div class="col-md-3 col-sm-3" style="background-color:#911717;">
+					<div class="counter-text" style="background-color:#911717;">
 					<span class="box1"><span aria-hidden="true" class="	fa fa-envelope-o"></span></span>
-					<a href="https://kjsieit.s3.ap-south-1.amazonaws.com/Placements/placement++process.pdf" target="_blank" style="color:white;">
+					<a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Result Declaration & Email Communication</p></a>
 					</div>
 				</div>
@@ -233,7 +252,7 @@
 						<div class="row">
 							<div class="col-md-2 col-sm-2">
 								<div class="company-logo">
-									<img src="{% static 'img/pinclick.png' %}" style="margin-top: 20px;" class="img-responsive" alt="" />
+									<img src="{% static 'img/pinclick.png' %}" style="margin-top: 20px;" class="img-responsive" alt="">
 								</div>
 							</div>
 							<div class="col-md-10 col-sm-10">
@@ -258,5 +277,11 @@
 		<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
 		<script src="{% static 'js/bootsnav.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
+		<script type="text/javascript">
+		   if (window.location.search == "?success"){
+		       alert("Interested Noted Down Successfully");
+
+		   }
+		</script>
     </body>
 </html>

@@ -14,16 +14,16 @@
 		<!-- Style & Common Css -->
 		<link rel="stylesheet" href="{% static 'css/common.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
-      <style>
+        <style>
         .details{
-         
+
           font-size: 20px;
           color:black;
           margin-top: 2%;
 
         }
         .details:hover{
-        
+
           text-decoration: underline;
           color: #911717;
           transition: 0.5s;
@@ -48,7 +48,7 @@
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
 								<div class="company-content">
-                                    <p><span class="package" style="color: #DA0833; font-size:25px;">{{ comp.comp_name }}</span><span class="package" style="color: #DA0833;">Eligibility : {{ comp.eligibility }}</span><span><span><button type="button"><a href="/tnp_admin/edit_company?c={{ comp.comp_name }}"><i class="fa fa-pencil-square-o"></i></a></button></span><button type="button"><a href="/tnp_admin/delete_company?c={{ comp.comp_name }}"><i class="fa fa-trash"></i></a></button></span></p>
+                                    <p><span class="package" style="color: #DA0833; font-size:25px;">{{ comp.comp_name }}</span><span class="package" style="color: green;">Eligibility : {{ comp.eligibility }}</span><span><span><button type="button"><a href="/tnp_admin/edit_company?c={{ comp.comp_name }}"><i class="fa fa-pencil-square-o"></i></a></button></span><button type="button"><a href="/tnp_admin/delete_company?c={{ comp.comp_name }}"><i class="fa fa-trash"></i></a></button></span></p>
 									<p><span class="company-name"><i class="fa fa-briefcase"></i>{{ comp.comp_profile }}</span><span class="campus"><i class="fa fa-tag"></i>{{ comp.campus }}</span><span class="company-location"><i class="fa fa-map-marker"></i>{{ comp.venue }}</span><span class="company-name"><i class="fa fa-briefcase"></i>{{ comp.branch }}</span><span class="package"><i class="fa fa-money"></i>{{ comp.ctc }}</span><span class="package"><i class="glyphicon glyphicon-time"></i>{{ comp.time }}</span><span class="package"><i class="fa fa-calendar"></i>{{ comp.date }}</span><span class="fa fa-book"><i class=""></i>{{ comp.bond }}</span><span class="instruction"><i class="fa fa-bars"></i>{{ comp.instruction }}</span></p>
 								</div>
 							</div>
@@ -73,26 +73,30 @@
                             <td>{{ eligible.stud_user }}</td>
                             <td>{{ eligible.stud_name }}</td>
                             <td>{{ eligible.branch }}</td>
-                              <td><button class="btn btn-outline-primary" name="placed"><a href="/tnp_admin/student_placed?s={{ eligible.stud_user|urlencode }}&c={{ comp.comp_name|urlencode }}">Select</a></button></td>
+                              <td><button class="btn btn-outline-primary" name="placed"><a href="/tnp_admin/student_placed?s={{ eligible.stud_user|urlencode }}&c={{ comp.comp_name|urlencode }}">Selected Student</a></button></td>
                           </tr>
                         {% endifequal %}
                     {% endfor %}
                         </tbody>
                       </table>
+                        {% elif eligibles == "nostudents" %}
+                        <p>No Student responded.</p>
                         {% else %}
                         <p>No student eligible.</p>
                         {% endif %}
                         <br>
                     </div>
 					{% endfor %}
-          <a href="/tnp_admin/company_details" class="details" target="_blank">List of all the comapanies</a>
+				<a href="/tnp_admin/company_details" class="details" target="_blank">List of all the comapanies</a>
 				</div>
+     
 				{% else %}
         		<p>No companies added yet.</p>
         	{% endif %}
 			</div>
 		</section>
-		
+		{% include "footer.html" %}
+
         <script>
 $(document).ready(function(){
 $('table.table1').DataTable();

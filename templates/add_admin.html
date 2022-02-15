@@ -17,7 +17,7 @@
 
     </head>
 
-    <body bgcolor="#E6E6FA">
+    <body>
 
 <!-- Navigation Start  -->
 {% include "admin_dashboard.html" %}
@@ -32,8 +32,12 @@
 <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-<h3>Add Admin (Form)</h3>
+<h3>Add Admin</h3>
+{% if validate == "Add Admin"%}
+<p style="color:#911717">{{ validate }}</p>
+{%else%}
 <p style="color:green">{{ validate }}</p>
+{% endif %}
 <p style="color:red">{{ invalidate }}</p>
 <input type="text" class="form-control input-lg" placeholder="Name" name="name" required>
 <input type="email" class="form-control input-lg" placeholder="Username" pattern="^[a-zA-Z0-9.]+@somaiya\.edu$" name="uname" required>
@@ -50,7 +54,9 @@
 </div>
 </div>
 </section>
+<div style="flex-grow: 1;margin-top: 10%;"></div>
 <!-- section End -->
+{% include "footer.html" %}
 
         <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>

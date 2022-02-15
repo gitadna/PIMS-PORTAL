@@ -143,7 +143,7 @@ button:hover {
 <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
 
 
-<form id="regForm" method="post" action="/student/resume_update/" enctype="multipart/form-data" class="border-class">
+<form id="regForm" method="post" action="/student/resume_update/" enctype="multipart/form-data" class="border-class" accept-charset="UTF-8">
   {% csrf_token %}
   <h4>Resume</h4>
   <!-- One "tab" for each step in the form: -->
@@ -330,28 +330,6 @@ button:hover {
       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" accept="image/*">
     {% endif %}
 
-    {% if resume.sem7 == None %}
-      <p><label for="sem7_i"><b>Sem 7 :</b></label></p>
-      <input type="text" id="sem7_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7f" accept="image/*">
-    {% else %}
-    <p><label for="sem6_i2"><b>Sem 7 :</b></label></p>
-      <input type="text" id="sem7_i2" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem7 }}" oninput="this.className = ''" name="sem7">
-      <a href="{{ resume.sem7f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7f" accept="image/*">
-    {% endif %}
-
-    {% if resume.sem8 == None %}
-      <p><label for="sem8_i"><b>Sem 8 :</b></label></p>
-      <input type="text" id="sem8_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8f" accept="image/*">
-    {% else %}
-    <p><label for="sem8_i2"><b>Sem 8 :</b></label></p>
-      <input type="text" id="sem8_i2" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem8 }}" oninput="this.className = ''" name="sem8">
-      <a href="{{ resume.sem8f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8f" accept="image/*">
-    {% endif %}
-
       <p><label for="agg"><b>Aggregate :</b></label></p>
       <input type="text" id="agg" placeholder="Aggregate" class="input-group form-control input-lg valid" value="{{ resume.agg }}" oninput="this.className = ''" name="aggregate">
 
@@ -415,7 +393,7 @@ button:hover {
 
 
   <div class="tab"><h5>Personal Details</h5>
-  <p><label for="number"><b>Id Number :</b></label></p>
+  <p><label for="number"><b>PRN Number :</b></label></p>
     <p><input type="text" id="number" placeholder="Id Number" class="input-group form-control input-lg checkvalid valid" oninput="this.className = ''" name="number" value="{{ resume.number }}" disabled></p>
     {% if hn == "Mr." %}
       <p><select class="input-group form-control checkvalid" oninput="this.className = ''" name="hn">
@@ -560,28 +538,6 @@ button:hover {
       <input type="text" id="sem6_i2d" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem6 }}" oninput="this.className = ''" name="sem6">
       <a href="{{ resume.sem6f.url }}" download>View</a>
       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" accept="image/*">
-    {% endif %}
-
-    {% if resume.sem7 == None %}
-      <p><label for="sem7_id"><b>Sem 7 :</b></label></p>
-      <input type="text" id="sem7_id" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7f" accept="image/*">
-    {% else %}
-    <p><label for="sem6_i2d"><b>Sem 7 :</b></label></p>
-      <input type="text" id="sem7_i2d" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem7 }}" oninput="this.className = ''" name="sem7">
-      <a href="{{ resume.sem7f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7f" accept="image/*">
-    {% endif %}
-
-    {% if resume.sem8 == None %}
-      <p><label for="sem8_id"><b>Sem 8 :</b></label></p>
-      <input type="text" id="sem8_id" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8f" accept="image/*">
-    {% else %}
-    <p><label for="sem8_i2d"><b>Sem 8 :</b></label></p>
-      <input type="text" id="sem8_i2d" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem8 }}" oninput="this.className = ''" name="sem8">
-      <a href="{{ resume.sem8f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8f" accept="image/*">
     {% endif %}
 
       <p><label for="aggd"><b>Aggregate :</b></label></p>

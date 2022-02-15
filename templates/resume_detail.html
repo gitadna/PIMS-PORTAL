@@ -3,6 +3,24 @@
 <html>
 <head>
 
+<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'http://localhost/Open-Web-Analytics-1.7.3/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', 'cea78186b3a1a9874b7bcad9241409d6']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+
+(function() {
+    var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+    owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+    _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+    var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+</script>
+<!-- End Open Web Analytics Code -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,7 +136,7 @@ button:hover {
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-sticky bootsnav">
+<nav class="navbar navbar-default navbar-sticky bootsnav" style="background-color:#911717;">
 
       <div class="container">
         <!-- Start Header Navigation -->
@@ -126,7 +144,7 @@ button:hover {
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
             <i class="fa fa-bars"></i>
           </button>
-          <a class="navbar-brand" href="/student/resume/" style=" font-size: 30px; margin-top: 10px;">Student</a>
+          <a class="navbar-brand" href="/student/resume/" style="font-size: 30px; margin-top: 4px; color:white;font-weight:bold;">Student</a>
         </div>
         <!-- End Header Navigation -->
 
@@ -144,7 +162,7 @@ button:hover {
   <div class="form-group">
 
 <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
-<form id="regForm" method="post" action="/student/resume/" enctype="multipart/form-data" class="border-class">
+<form id="regForm" method="post" action="/student/resume/" enctype="multipart/form-data" class="border-class" accept-charset="UTF-8">
   {% csrf_token %}
   <h4>Resume</h4>
   <!-- One "tab" for each step in the form: -->
@@ -246,14 +264,6 @@ button:hover {
       <input type="text" id="sem6_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6" value="{{ sem6 }}">
        <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" value="{{ sem6f }}" accept="image/*">
 
-    <p><label for="sem7_i"><b>Sem 7 :</b></label></p>
-      <input type="text" id="sem7_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7" value="{{ sem7 }}">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem7f" value="{{ sem7f }}" accept="image/*">
-
-    <p><label for="sem8_i"><b>Sem 8 :</b></label></p>
-      <input type="text" id="sem8_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8" value="{{ sem8 }}">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem8f" value="{{ sem8f }}" accept="image/*">
-
       <p><label for="agg"><b>Aggregate :</b></label></p>
       <input type="text" id="agg" placeholder="Aggregate" class="input-group form-control input-lg valid" oninput="this.className = ''" name="aggregate" value="{{ aggregate }}">
 
@@ -264,7 +274,7 @@ button:hover {
   <div class="tab"><h5 style="font-size:20px;">SSC</h5>
       <p><label for="ssc_m"><b>Marks :</b></label></p>
     <input type="text" id="ssc_m" placeholder="Marks" class="input-group form-control input-lg valid" oninput="this.className = ''" name="ssc" value="{{ ssc_marks }}">
-      <input type="file" class="checkvalid checkvalid input-group form-control input-lg valid" oninput="this.className = ''" name="sscf" value="{{ sscf }}">
+      <input type="file" class="checkvalid checkvalid input-group form-control input-lg valid" oninput="this.className = ''" name="sscf" value="{{ sscf }}" accept="image/*">
     <p><label for="ssc_i"><b>Institute :</b></label></p>
     <input type="text" id="ssc_i" placeholder="Institute" class="checkvalid input-group form-control input-lg valid" oninput="this.className = ''" name="ssc_inst" value="{{ ssc_institute }}">
     <p><label for="ssc_y"><b>Year:</b></label></p>
@@ -304,7 +314,6 @@ button:hover {
         <p><label for="hsc_m"><b>Marks :</b></label></p>
       <input type="text" id="hsc_m" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="hsc" value="{{ hsc_marks }}">
        <input type="file" id="hsc_f" class="input-group form-control input-lg" oninput="this.className = ''" name="hscf" value="{{ hscf }}" accept="image/*">
-
         <p><label for="hsc_inst"><b>Institute :</b></label></p>
     <input type="text" id="hsc_inst" placeholder="Institute" class="input-group form-control input-lg" oninput="this.className = ''" name="hsc_inst" value="{{ hsc_institute }}">
         <p><label for="hsc_year"><b>Year :</b></label></p>

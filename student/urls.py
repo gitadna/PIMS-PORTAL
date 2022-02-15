@@ -13,3 +13,6 @@ urlpatterns = [
     path('logout_student/', views.logout_student, name='logout_student'),
 
 ]+ static('resume/media/', document_root=settings.MEDIA_ROOT)
+
+urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns+= static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

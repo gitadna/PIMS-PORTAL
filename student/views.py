@@ -9,7 +9,7 @@ from student.models import User
 from student.models import Resume
 from django.http import HttpResponse
 from django.views.generic import View
-from tnp_admin.models import StudentsEligible, Company, StudentPlaced
+from tnp_admin.models import StudentsEligible, Company, StudentPlaced,mailResponse
 from .utils import render_to_pdf
 
 
@@ -57,10 +57,6 @@ def resume(request):
             sem5f = request.FILES.get('sem5f')
             sem6 = request.POST['sem6'].strip()
             sem6f = request.FILES.get('sem6f')
-            sem7 = request.POST['sem7'].strip()
-            sem7f = request.FILES.get('sem7f')
-            sem8 = request.POST['sem8'].strip()
-            sem8f = request.FILES.get('sem8f')
             aggregate = request.POST['aggregate'].strip()
             ssc_marks = request.POST['ssc'].strip()
             sscf = request.FILES.get('sscf')
@@ -93,18 +89,23 @@ def resume(request):
 
             if phone.isnumeric() == False:
                 error.append("Invalid Contact Number (10 digits start with 9/8/7).")
-            
+
             if number.isnumeric() == False or len(number) > 16 or len(number) < 16:
-                error.append("Invalid PRN NO.")
+                prn_no = Resume.objects.all()
+                if prn_no == number:
+                    error.append("Same PRN NO. cannot be hold by the more thant one user")
+                else:
+                    error.append("Invalid PRN NO.")
+
 
             if len(phone) < 10:
                 error.append("Invalid Contact Number (10 digits start with 9/8/7).")
 
-            if (sem1 != "" and sem1f is None) or (sem1 == "" and sem1f is not None):
-                error.append("Sem 1 Marks or File missing.")
+            #if (sem1 != "" and sem1f is None) or (sem1 == "" and sem1f is not None):
+              #  error.append("Sem 1 Marks or File missing.")
 
-            if (sem2 != "" and sem2f is None) or (sem2 == "" and sem2f is not None):
-                error.append("Sem 2 Marks or File missing.")
+           # if (sem2 != "" and sem2f is None) or (sem2 == "" and sem2f is not None):
+            #    error.append("Sem 2 Marks or File missing.")
 
             if (sem3 != "" and sem3f is None) or (sem3 == "" and sem3f is not None):
                 error.append("Sem 3 Marks or File missing.")
@@ -118,11 +119,11 @@ def resume(request):
             if (sem6 != "" and sem6f is None) or (sem6 == "" and sem6f is not None):
                 error.append("Sem 6 Marks or File missing.")
 
-            if (sem7 != "" and sem7f is None) or (sem7 == "" and sem7f is not None):
-                error.append("Sem 7 Marks or File missing.")
+          #  if (sem7 != "" and sem7f is None) or (sem7 == "" and sem7f is not None):
+           #     error.append("Sem 7 Marks or File missing.")
 
-            if (sem8 != "" and sem8f is None) or (sem8 == "" and sem8f is not None):
-                error.append("Sem 8 Marks or File missing.")
+            #if (sem8 != "" and sem8f is None) or (sem8 == "" and sem8f is not None):
+             #   error.append("Sem 8 Marks or File missing.")
 
             if sem3 != "":
                 if any(c.isalpha() for c in sem3) == True or float(sem3) > 10:
@@ -140,13 +141,13 @@ def resume(request):
                 if any(c.isalpha() for c in sem6) == True or float(sem6) > 10:
                     error.append("Invalid Sem 6 marks.")
 
-            if sem7 != "":
-                if any(c.isalpha() for c in sem7) == True or float(sem7) > 10:
-                    error.append("Invalid Sem 7 marks.")
+          #  if sem7 != "":
+           #     if any(c.isalpha() for c in sem7) == True or float(sem7) > 10:
+            #        error.append("Invalid Sem 7 marks.")
 
-            if sem8 != "":
-                if any(c.isalpha() for c in sem8) == True or float(sem8) > 10:
-                    error.append("Invalid Sem 8 marks.")
+            #if sem8 != "":
+             #   if any(c.isalpha() for c in sem8) == True or float(sem8) > 10:
+              #      error.append("Invalid Sem 8 marks.")
 
             if any(c.isalpha() for c in aggregate) == True or float(aggregate) > 10:
                 error.append("Invalid Aggregate marks.")
@@ -163,6 +164,18 @@ def resume(request):
                 if sem2 != "":
                     if any(c.isalpha() for c in sem2) == True or float(sem2) > 10:
                         error.append("Invalid Sem 2 marks.")
+                if sem1f is not None:
+
+                    if sem1f.size > MAX_UPLOAD_SIZE:
+
+                        error.append("Sem 1 file upload size less than 1.0 MB")
+
+                if sem2f is not None:
+
+                    if sem2f.size > MAX_UPLOAD_SIZE:
+
+                        error.append("Sem 2 file upload size less than 1.0 MB")
+
                 if hsc_marks == "":
                     error.append("HSC marks are mandatory.")
                 if any(c.isalpha() for c in hsc_marks) == True or float(hsc_marks) > 100:
@@ -177,6 +190,7 @@ def resume(request):
                     if hscf.size > MAX_UPLOAD_SIZE:
                         error.append("HSC file upload size less than 1.0 MB")
 
+
             else:
                 diploma_check = "yes"
                 if diploma == "":
@@ -190,7 +204,7 @@ def resume(request):
                 if diploma_year.isnumeric() == False:
                     error.append("Diploma Passing year is invalid.")
                 if diplomaf is not None:
-                    if (not diplomaf.name.endswith('.png', '.jpg', '.jpeg')) or diplomaf.size > MAX_UPLOAD_SIZE:
+                    if diplomaf.size > MAX_UPLOAD_SIZE:
                         error.append("Diploma file upload size less than 1.0 MB")
 
             if ssc_marks == "":
@@ -204,13 +218,7 @@ def resume(request):
             if ssc_year.isnumeric() == False:
                 error.append("SSC Passing year is invalid.")
 
-            if sem1f is not None:
-                if sem1f.size > MAX_UPLOAD_SIZE:
-                    error.append("Sem 1 file upload size less than 1.0 MB")
 
-            if sem2f is not None:
-                if sem2f.size > MAX_UPLOAD_SIZE:
-                    error.append("Sem 2 file upload size less than 1.0 MB")
 
             if sem3f is not None:
                 if sem3f.size > MAX_UPLOAD_SIZE:
@@ -228,13 +236,13 @@ def resume(request):
                 if sem6f.size > MAX_UPLOAD_SIZE:
                     error.append("Sem 6 file upload size less than 1.0 MB")
 
-            if sem7f is not None:
-                if sem7f.size > MAX_UPLOAD_SIZE:
-                    error.append("Sem 7 file upload size less than 1.0 MB")
+           # if sem7f is not None:
+            #    if sem7f.size > MAX_UPLOAD_SIZE:
+             #       error.append("Sem 7 file upload size less than 1.0 MB")
 
-            if sem8f is not None:
-                if sem8f.size > MAX_UPLOAD_SIZE:
-                    error.append("Sem 8 file upload size less than 1.0 MB")
+#            if sem8f is not None:
+ #               if sem8f.size > MAX_UPLOAD_SIZE:
+  #                  error.append("Sem 8 file upload size less than 1.0 MB")
 
             if sscf is not None:
                 if sscf.size > MAX_UPLOAD_SIZE:
@@ -248,10 +256,10 @@ def resume(request):
                 sem5 = None
             if sem6 == '':
                 sem6 = None
-            if sem7 == '':
-                sem7 = None
-            if sem8 == '':
-                sem8 = None
+          #  if sem7 == '':
+           #     sem7 = None
+        #    if sem8 == '':
+         #       sem8 = None
 
             if len(error) > 0:
                 if request.POST.get('diploma') is None:
@@ -278,10 +286,6 @@ def resume(request):
                         "sem5f": sem5f,
                         "sem6": sem6,
                         "sem6f": sem6f,
-                        "sem7": sem7,
-                        "sem7f": sem7f,
-                        "sem8": sem8,
-                        "sem8f": sem8f,
                         "aggregate": aggregate,
                         "ssc_marks": ssc_marks,
                         "sscf": sscf,
@@ -324,10 +328,6 @@ def resume(request):
                         "sem5f": sem5f,
                         "sem6": sem6,
                         "sem6f": sem6f,
-                        "sem7": sem7,
-                        "sem7f": sem7f,
-                        "sem8": sem8,
-                        "sem8f": sem8f,
                         "aggregate": aggregate,
                         "ssc_marks": ssc_marks,
                         "sscf": sscf,
@@ -352,7 +352,7 @@ def resume(request):
                                           diploma=None, diploma_inst=None, diploma_year=None,
                                           diplomaf=None, sem3=sem3, sem3f=sem3f, sem4=sem4, sem4f=sem4f,
                                           sem5=sem5, sem5f=sem5f,
-                                          sem6=sem6, sem6f=sem6f, sem7=sem7, sem7f=sem7f, sem8=sem8, sem8f=sem8f,
+                                          sem6=sem6, sem6f=sem6f,
                                           agg=aggregate,
                                           ssc_marks=ssc_marks, sscf=sscf,
                                           ssc_institute=ssc_institute, ssc_year=ssc_year, hsc_marks=hsc_marks, hscf=hscf,
@@ -366,7 +366,7 @@ def resume(request):
                                           diploma=diploma, diploma_inst=diploma_inst, diploma_year=diploma_year,
                                           diplomaf=diplomaf, sem3=sem3, sem3f=sem3f, sem4=sem4, sem4f=sem4f,
                                           sem5=sem5, sem5f=sem5f,
-                                          sem6=sem6, sem6f=sem6f, sem7=sem7, sem7f=sem7f, sem8=sem8, sem8f=sem8f,
+                                          sem6=sem6, sem6f=sem6f,
                                           agg=aggregate,
                                           ssc_marks=ssc_marks, sscf=sscf,
                                           ssc_institute=ssc_institute, ssc_year=ssc_year, hsc_marks=None, hscf=None,
@@ -449,12 +449,6 @@ def resume_update(request):
                 sem6 = request.POST['sem6'].strip()
                 sem6f = request.FILES.get('sem6f')
                 pageObj.sem6 = sem6
-                sem7 = request.POST['sem7'].strip()
-                sem7f = request.FILES.get('sem7f')
-                pageObj.sem7 = sem7
-                sem8 = request.POST['sem8'].strip()
-                sem8f = request.FILES.get('sem8f')
-                pageObj.sem8 = sem8
 
                 if sem3 == '':
                     pageObj.sem3 = None
@@ -464,10 +458,10 @@ def resume_update(request):
                     pageObj.sem5 = None
                 if sem6 == '':
                     pageObj.sem6 = None
-                if sem7 == '':
-                    pageObj.sem7 = None
-                if sem8 == '':
-                    pageObj.sem8 = None
+                #if sem7 == '':
+                  #  pageObj.sem7 = None
+            #    if sem8 == '':
+             #       pageObj.sem8 = None
 
                 MAX_UPLOAD_SIZE = 1048576
 
@@ -495,17 +489,17 @@ def resume_update(request):
                     else:
                         pageObj.sem6f = sem6f
 
-                if sem7f is not None:
-                    if sem7f.size > MAX_UPLOAD_SIZE:
-                        error.append("Sem 7 file upload size less than 1.0 MB")
-                    else:
-                        pageObj.sem7f = sem7f
+              #  if sem7f is not None:
+               #     if sem7f.size > MAX_UPLOAD_SIZE:
+                #        error.append("Sem 7 file upload size less than 1.0 MB")
+                 #   else:
+                  #      pageObj.sem7f = sem7f
 
-                if sem8f is not None:
-                    if sem8f.size > MAX_UPLOAD_SIZE:
-                        error.append("Sem 8 file upload size less than 1.0 MB")
-                    else:
-                        pageObj.sem8f = sem8f
+        #        if sem8f is not None:
+         #           if sem8f.size > MAX_UPLOAD_SIZE:
+          #              error.append("Sem 8 file upload size less than 1.0 MB")
+           #         else:
+            #            pageObj.sem8f = sem8f
 
                 if phone.isnumeric() == False:
                     error.append("Invalid Contact Number (10 digits start with 9/8/7).")
@@ -524,10 +518,10 @@ def resume_update(request):
                     error.append("Sem 5 Marks missing.")
                 if (sem6 == "" and sem6f is not None) or (sem6 == "" and bool(pageObj.sem6f) == True):
                     error.append("Sem 6 Marks missing.")
-                if (sem7 == "" and sem7f is not None) or (sem7 == "" and bool(pageObj.sem7f) == True):
-                    error.append("Sem 7 Marks missing.")
-                if (sem8 == "" and sem8f is not None) or (sem8 == "" and bool(pageObj.sem8f) == True):
-                    error.append("Sem 8 Marks missing.")
+             #   if (sem7 == "" and sem7f is not None) or (sem7 == "" and bool(pageObj.sem7f) == True):
+              #      error.append("Sem 7 Marks missing.")
+              #  if (sem8 == "" and sem8f is not None) or (sem8 == "" and bool(pageObj.sem8f) == True):
+             #       error.append("Sem 8 Marks missing.")
 
                 if sem3 != "" and bool(pageObj.sem3f) == False and sem3f == None:
                     error.append("Sem 3 File missing.")
@@ -537,10 +531,10 @@ def resume_update(request):
                     error.append("Sem 5 File missing.")
                 if sem6 != "" and bool(pageObj.sem6f) == False and sem6f == None:
                     error.append("Sem 6 File missing.")
-                if sem7 != "" and bool(pageObj.sem7f) == False and sem7f == None:
-                    error.append("Sem 7 File missing.")
-                if sem8 != "" and bool(pageObj.sem8f) == False and sem8f == None:
-                    error.append("Sem 8 File missing.")
+              #  if sem7 != "" and bool(pageObj.sem7f) == False and sem7f == None:
+               #     error.append("Sem 7 File missing.")
+            #    if sem8 != "" and bool(pageObj.sem8f) == False and sem8f == None:
+             #       error.append("Sem 8 File missing.")
 
                 if sem3f is not None:
                     if sem3f.size > MAX_UPLOAD_SIZE:
@@ -566,17 +560,17 @@ def resume_update(request):
                     else:
                         pageObj.sem6f = sem6f
 
-                if sem7f is not None:
-                    if sem7f.size > MAX_UPLOAD_SIZE:
-                        error.append("Sem 7 file upload size less than 1.0 MB")
-                    else:
-                        pageObj.sem7f = sem7f
+              #  if sem7f is not None:
+               #     if sem7f.size > MAX_UPLOAD_SIZE:
+                #        error.append("Sem 7 file upload size less than 1.0 MB")
+                 #   else:
+ #                       pageObj.sem7f = sem7f
 
-                if sem8f is not None:
-                    if sem8f.size > MAX_UPLOAD_SIZE:
-                        error.append("Sem 8 file upload size less than 1.0 MB")
-                    else:
-                        pageObj.sem8f = sem8f
+#                if sem8f is not None:
+ #                   if sem8f.size > MAX_UPLOAD_SIZE:
+  #                      error.append("Sem 8 file upload size less than 1.0 MB")
+   #                 else:
+    #                    pageObj.sem8f = sem8f
 
                 if sem3 != "":
                     if any(c.isalpha() for c in sem3) == True or float(sem3) > 10:
@@ -594,14 +588,14 @@ def resume_update(request):
                     if any(c.isalpha() for c in sem6) == True or float(sem6) > 10:
                         error.append("Invalid Sem 6 marks.")
 
-                if sem7 != "":
-                    if any(c.isalpha() for c in sem7) == True or float(sem7) > 10:
-                        error.append("Invalid Sem 7 marks.")
-
-                if sem8 != "":
-                    if any(c.isalpha() for c in sem8) == True or float(sem8) > 10:
-                        error.append("Invalid Sem 8 marks.")
-
+     #           if sem7 != "":
+      #              if any(c.isalpha() for c in sem7) == True or float(sem7) > 10:
+       #                 error.append("Invalid Sem 7 marks.")
+#
+ #               if sem8 != "":
+  #                  if any(c.isalpha() for c in sem8) == True or float(sem8) > 10:
+   #                     error.append("Invalid Sem 8 marks.")
+#
                 if any(c.isalpha() for c in aggregate) == True or float(aggregate) > 10:
                     error.append("Invalid Aggregate marks.")
 
@@ -704,7 +698,7 @@ def resume_update(request):
                         error.append("Diploma Passing year is invalid.")
 
                     if diplomaf is not None:
-                        if (not diplomaf.name.endswith('.png', '.jpg', '.jpeg')) or diplomaf.size > MAX_UPLOAD_SIZE:
+                        if diplomaf.size > MAX_UPLOAD_SIZE:
                             error.append("Diploma file upload size less than 1.0 MB")
                         else:
                             pageObj.diplomaf = diplomaf
@@ -781,8 +775,6 @@ class GeneratePdf(View):
             "resume_sem4": resumes.sem4,
             "resume_sem5": resumes.sem5,
             "resume_sem6": resumes.sem6,
-            "resume_sem7": resumes.sem7,
-            "resume_sem8": resumes.sem8,
             "resume_agg": resumes.agg,
             "resume_sscm": resumes.ssc_marks,
             "resume_ssci": resumes.ssc_institute,
@@ -820,30 +812,38 @@ def company(request):
         normal = []
         users = request.session['username']
         company = Company.objects.all().order_by('-id')
-        comp_list = list(company.values())
-        for comp in comp_list:
-            if int(comp['ctc']) > 600000:
-                if StudentsEligible.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
-                    temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Eligible", comp['instruction'], comp['campus']]
-                elif StudentPlaced.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
-                    temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Placed", comp['instruction'], comp['campus']]
-                else:
-                    temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Not Eligible", comp['instruction'], comp['campus']]
-                dream.append(temp)
-            else:
-                if StudentsEligible.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
-                    temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Eligible", comp['instruction'], comp['campus']]
-                elif StudentPlaced.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
-                    temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Placed", comp['instruction'], comp['campus']]
-                else:
-                    temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Not Eligible", comp['instruction'], comp['campus']]
-                normal.append(temp)
+        stud_interest = mailResponse.objects.filter(stud_user=users)
 
-        data = {
-            'dream': dream,
-            'normal': normal,
-        }
-        return render(request, 'student_company.html', data)
+        comp_list = list(company.values())
+
+        for response in stud_interest:
+            if int(response.stud_response) == 1:
+                for comp in comp_list:
+                    if int(comp['ctc']) > 600000:
+                        if StudentsEligible.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
+                            temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Eligible", comp['instruction'], comp['campus']]
+                        elif StudentPlaced.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
+                            temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Placed", comp['instruction'], comp['campus']]
+                        else:
+                            temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Not Eligible", comp['instruction'], comp['campus']]
+                        dream.append(temp)
+                    else:
+                        if StudentsEligible.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
+                            temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Eligible", comp['instruction'], comp['campus']]
+                        elif StudentPlaced.objects.filter(stud_user=users, comp_name=comp['comp_name']).exists():
+                            temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Placed", comp['instruction'], comp['campus']]
+                        else:
+                            temp = [comp['comp_name'], comp['comp_profile'], comp['ctc'], comp['eligibility'], comp['bond'], comp['date'], comp['time'], comp['venue'], comp['branch'], "Not Eligible", comp['instruction'], comp['campus']]
+                        normal.append(temp)
+
+                data = {
+                    'dream': dream,
+                    'normal': normal,
+                }
+                return render(request, 'student_company.html', data)
+            else:
+                return render(request, 'student_company.html',{"interest":"not-interested"})
+        return render(request,'student_company.html')
 
 
 def handler404(request, exception):

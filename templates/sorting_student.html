@@ -25,7 +25,17 @@
     <select name="student_filter" onchange="submit()" class="input-group form-control" style="margin:30px;width:56%;cursor:pointer;">
     <option value="" disabled selected>Sort By</option>
     <option value="Gender">Gender</option>
+    {% if request.session.admin_type == "Super" %}
     <option value="Branch">Branch</option>
+    {%elif request.session.admin_type == "Information Technology"%}
+    <option value="Branch">IT Students</option>
+    {%elif request.session.admin_type == "Computer"%}
+    <option value="Branch">IT Students</option>
+    {%elif request.session.admin_type == "Electronics & Telecommunication"%}
+    <option value="Branch">IT Students</option>
+    {%elif request.session.admin_type == "Electronics"%}
+    <option value="Branch">IT Students</option>
+    {%endif%}
     <option value="Percentage_low">Percentage : Low to High </option>
     <option value="Percentage_high">Percentage : Hight to Low </option>
     </select>
@@ -129,6 +139,8 @@
 
 
 </div>
+<div style="flex-grow: 1;margin-top: 8%;"></div>
+{% include "footer.html" %}
 <script>
 $(document).ready(function(){
 $('table.table1').DataTable();

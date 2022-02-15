@@ -42,6 +42,9 @@ table, th, td {
      <p style="text-align:center; font-size:13px;">Company : <b>{{ company }}</b></p>
      <p style="text-align:center; font-size:13px;">Date : <b>{{ comps.date }}</b></p>
      <br>
+     {% if eligibles == "nostudents" %}
+     <p>No Student have responded to this company</p>
+     {%else%}
      <table cellpadding="5">
          <tr style="color:#da0833;font-size:14px;">
              <th width="20%">#</th>
@@ -58,5 +61,6 @@ table, th, td {
      </tr>
               {% endfor %}
      </table>
+     {%endif%}
     </body>
     </html>

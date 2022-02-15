@@ -16,7 +16,7 @@ urlpatterns = [
                   path('student_placed', views.student_placed, name="student_placed"),
                   path('display_placed', views.display_placed, name="display_placed"),
                   path('eligible_pdf', views.pdf, name="pdf"),
-                  path('company_details', views.company_details, name="comapny_pdf"),
+                  path('company_details', views.company_details, name="company_details"),
                   path('delete_resume', views.delete_resume, name="delete_resume"),
                   path('delete_user', views.delete_user, name="delete_user"),
                   path('delete_company', views.delete_company, name="delete_company"),
@@ -25,5 +25,10 @@ urlpatterns = [
                   path('unlockResume', views.unlockResume, name="unlockResume"),
                   path('lockResume', views.lockResume, name="lockResume"),
                   path('add_excel', views.add_excel, name="add_excel"),
-                  path('sorting_student', views.sorting_student, name="sorting_student")
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('sorting_student', views.sorting_student, name="sorting_student"),
+                  path('student_details', views.filled_student, name="filled-student-details")
+                  
+              ]
+
+urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns+= static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

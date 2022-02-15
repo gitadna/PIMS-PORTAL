@@ -37,8 +37,8 @@
 <input type="text" class="form-control input-lg" placeholder="CTC" name="ctc"  required pattern="\d*"  oninvalid="setCustomValidity('Enter valid format. Eg: 100000')"
 onchange="try{setCustomValidity('')}catch(e){}" value="{{ comp.ctc }}" readonly>
 <input type="text" class="form-control input-lg" placeholder="Eligibility" name="eligible" required pattern="\d*"  oninvalid="setCustomValidity('Enter valid format. Eg: 70')"
-onchange="try{setCustomValidity('')}catch(e){}" value="{{ comp.eligibility }}" readonly>
-<input type="text" class="form-control input-lg" placeholder="Branch" name="branch" required value="{{ comp.branch }}" readonly>
+onchange="try{setCustomValidity('')}catch(e){}" value="{{ comp.eligibility }}">
+<input type="text" class="form-control input-lg" placeholder="Branch" name="branch" required value="{{ comp.branch }}">
 <input type="text" class="form-control input-lg" placeholder="Bond Details" name="bond" required value="{{ comp.bond }}">
 <input type="date" class="form-control input-lg" placeholder="Date" name="date" required value="{{ comp.date|date:"Y-m-d" }}">
 <input type="time" class="form-control input-lg" placeholder="Time" name="time" required value="{{ comp.time|time:"H:i" }}">
@@ -61,6 +61,7 @@ onchange="try{setCustomValidity('')}catch(e){}" value="{{ comp.eligibility }}" r
 </div>
 </section>
 <!-- section End -->
+{% include "footer.html" %}
 
         <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>

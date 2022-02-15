@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 
-from tnp_admin.models import Admin
+from tnp_admin.models import Admin,mailResponse
 from student.models import User
 from tnp_admin.models import StudentPlaced, resetPassword
 
@@ -16,10 +16,10 @@ def login(request):
     if request.method == 'POST':
         user = request.POST['uname']
         password = request.POST['psw']
-        
+
         student = User.objects.filter(username=user).filter(password=password)
         admin = Admin.objects.filter(username=user, password=password)
-        
+
         if student:
             request.session['student_login'] = True
             request.session['username'] = user
@@ -30,21 +30,21 @@ def login(request):
             if (admin.admin_type == 'Super'):
                 request.session['admin_type'] = "Super"
                 # request.POST['admin_type']== "Superuser"
-                
+
             elif (admin.admin_type == 'Information Technology'):
                 request.session['admin_type']= 'Information Technology'
             elif (admin.admin_type == 'Computer'):
                 request.session['admin_type']= 'Computer'
-            
+
             elif (admin.admin_type == 'Electronics & Telecommunication'):
                 request.session['admin_type']= 'Electronics & Telecommunication'
-            
+
             elif (admin.admin_type == 'Electronics'):
                 request.session['admin_type']= 'Electronics'
             request.session['admin_login'] = True
             request.session['admin_username'] = user
-            
-           
+
+
             return HttpResponseRedirect("/tnp_admin/")
 
         else:
@@ -188,6 +188,28 @@ def recover(request):
             return render(request, 'cannot_recover.html')
     else:
         return HttpResponseRedirect("/error/")
+
+
+@never_cache
+def studentInterested(request):
+    tokens = request.GET.get('token')
+    stud_user = request.GET.get('stud')
+    getData = mailResponse.objects.filter(token=tokens)
+    if getData.count() > 0:
+        if request.method == "POST":
+            interested = request.POST['interested']
+            getData = mailResponse.objects.get(token=tokens)
+            getData.stud_response = interested
+            getData.save()
+
+            return HttpResponseRedirect("/?success")
+
+        else:
+            return render(request, 'studentEligibleMark.html')
+    else:
+        return HttpResponseRedirect("/error/")
+
+
 
 
 def handler404(request, exception):

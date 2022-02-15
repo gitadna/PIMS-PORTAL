@@ -26,11 +26,14 @@ urlpatterns = [
                   path('aboutus', TemplateView.as_view(template_name='aboutus.html')),
                   path('placement', views.placement, name='placement'),
                   path('login/', views.login, name='login'),
+                  path('studentEligibleMark', views.studentInterested, name='studentinterest'),
                   path('student/', include('student.urls')),
                   path('tnp_admin/', include('tnp_admin.urls')),
                   path('forgotPassword', views.forgotPassword, name="forgotPassword"),
                   path('recover/', views.recover, name="recover"),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ]
+urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns+= static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 
 handler404 = 'tnp_admin.views.handler404'
 handler500 = 'tnp_admin.views.handler500'

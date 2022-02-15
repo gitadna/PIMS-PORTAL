@@ -9,14 +9,16 @@ from django.shortcuts import render
 from django.template.loader import get_template
 from pandas.io.sas.sas_constants import magic
 import openpyxl
-
+from xhtml2pdf import pisa
+import datetime
 from student.models import User
 # Create your views here.
 from student.utils import render_to_pdf
-from tnp_admin.models import Admin, StudentsEligible, StudentPlaced
+from tnp_admin.models import Admin, StudentsEligible, StudentPlaced,mailResponse
 from tnp_admin.models import Company
-
+from secrets import token_urlsafe
 from student.models import Resume
+import urllib.parse
 
 
 @never_cache
@@ -409,8 +411,10 @@ def check_eligible(request):
                                                         branch=branch)
                     studentEligible.save()
                     stud_arr.append(temp)
-
-            print(stud_arr)
+                    current_time = datetime.datetime.now()
+                    token = token_urlsafe(16)
+                    saveToken = mailResponse(comp_name=comp.comp_name,stud_user=user,token=token,time=current_time, stud_response=0)
+                    saveToken.save()
             time = str(comp.time)
             date = str(comp.date)
             email_body = """\
@@ -460,10 +464,14 @@ def check_eligible(request):
                         <th style="border: 1px solid #6A6969;">Instruction</th>
                         <td style="border: 1px solid #6A6969;">%s</td>
                     </tr>
+                    <tr>
+                        <th style="border: 1px solid #6A6969;">If interested please click the link given</th>
+                        <td style="border: 1px solid #6A6969;"><a href="http://127.0.0.1:8000/studentEligibleMark?%s&%s">Click here</a></td>
+                    </tr>
                 </table>
             </body>
             </html>
-            """ % (comp.comp_name, comp.comp_name,comp.comp_profile, comp.ctc, comp.branch, comp.eligibility, comp.date, comp.time, comp.venue, comp.bond, comp.instruction)
+            """ % (comp.comp_name, comp.comp_name,comp.comp_profile, comp.ctc, comp.branch, comp.eligibility, comp.date, comp.time, comp.venue, comp.bond, comp.instruction, urllib.parse.urlencode({'token':token}), urllib.parse.urlencode({'stud':user}))
             email = EmailMessage('Placement', email_body, 'tnpportal7@gmail.com', stud_arr)
             email.content_subtype = "html"
             email.send()
@@ -482,35 +490,81 @@ def display_company(request):
         types=request.session.get('admin_type')
         if (types=="Super"):
             comp = Company.objects.all().order_by('-id')
-            eligible = StudentsEligible.objects.all()
+            students = StudentsEligible.objects.all()
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user)
+                    else:
+                        eligible = 'nostudents'
+            # stud_interest = mailResponse.objects.filter(stud_user = eligible.stud_user)
             if comp.count() > 0:
                 return render(request, 'display_company.html', {'comps': comp, 'eligibles': eligible})
             else:
                 return render(request, 'display_company.html')
         elif (types=="Information Technology"):
             comp = Company.objects.filter(branch=types).order_by('-id')
-            eligible = StudentsEligible.objects.filter(branch=types)
+            students = StudentsEligible.objects.filter(branch=types)
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user)
+                    else:
+                        eligible = 'nostudents'
             if comp.count() > 0:
                 return render(request, 'display_company.html', {'comps': comp, 'eligibles': eligible})
             else:
                 return render(request, 'display_company.html')
         elif (types=="Computer"):
             comp = Company.objects.filter(branch=types).order_by('-id')
-            eligible = StudentsEligible.objects.filter(branch=types)
+            students = StudentsEligible.objects.filter(branch=types)
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user)
+                    else:
+                        eligible = 'nostudents'
             if comp.count() > 0:
                 return render(request, 'display_company.html', {'comps': comp, 'eligibles': eligible})
             else:
                 return render(request, 'display_company.html')
         elif (types=="Electronics & Telecommunication"):
             comp = Company.objects.filter(branch=types).order_by('-id')
-            eligible = StudentsEligible.objects.filter(branch=types)
+            students = StudentsEligible.objects.filter(branch=types)
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user)
+                    else:
+                        eligible = 'nostudents'
             if comp.count() > 0:
                 return render(request, 'display_company.html', {'comps': comp, 'eligibles': eligible})
             else:
                 return render(request, 'display_company.html')
         elif (types=="Electronics"):
             comp = Company.objects.filter(branch=types).order_by('-id')
-            eligible = StudentsEligible.filter(branch=types)
+            students = StudentsEligible.objects.filter(branch=types)
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user)
+                    else:
+                        eligible = 'nostudents'
             if comp.count() > 0:
                 return render(request, 'display_company.html', {'comps': comp, 'eligibles': eligible})
             else:
@@ -564,10 +618,11 @@ def display_placed(request):
         return HttpResponseRedirect("/login/")
     elif request.method == "POST":
         types = request.session.get('admin_type')
-
-        # filter(branch=types)
-        if (types == "Super"):
+        if 'filter' in request.POST:
             filter = request.POST['filter']
+        else:
+            filter = False
+        if (types == "Super"):
             if filter == "CTC":
                 studentPlaced = StudentPlaced.objects.all().order_by('-ctc')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
@@ -578,7 +633,6 @@ def display_placed(request):
                 studentPlaced = StudentPlaced.objects.all().order_by('comp_name')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
         if (types == "Information Technology"):
-            filter = request.POST['filter']
             if filter == "CTC":
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
@@ -589,7 +643,7 @@ def display_placed(request):
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
         if (types == "Computer"):
-            filter = request.POST['filter']
+            # filter = request.POST['filter']
             if filter == "CTC":
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
@@ -600,7 +654,7 @@ def display_placed(request):
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
         if (types == "Electronics & Telecommunication"):
-            filter = request.POST['filter']
+            # filter = request.POST['filter']
             if filter == "CTC":
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
@@ -611,7 +665,7 @@ def display_placed(request):
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
         if (types == "Electronics"):
-            filter = request.POST['filter']
+            # filter = request.POST['filter']
             if filter == "CTC":
                 studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
@@ -623,8 +677,89 @@ def display_placed(request):
                 return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
 
     else:
-        studentPlaced = StudentPlaced.objects.all().order_by('comp_name')
-        return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': 'Company'})
+        types = request.session.get('admin_type')
+        if (types == "Super"):
+            studentPlaced = StudentPlaced.objects.all().order_by('comp_name')
+            return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': 'Company'})
+        else:
+            studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
+            return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': 'Company'})
+            
+        
+#filled students details are all fetched by this and download by these
+@never_cache
+def filled_student(request):
+    if not request.session.get('admin_login'):
+        return HttpResponseRedirect("/login/")
+    else:
+        admin_type=request.session.get('admin_type')
+        if(admin_type =="Super"):
+
+            filled_student_details = Resume.objects.all().order_by('branch')
+            
+            response = HttpResponse(content_type='text/csv')
+            
+            response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+            writer = csv.writer(response)
+            writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+            for filled_student in filled_student_details:
+                writer.writerow([filled_student.name,
+                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+        
+        elif(admin_type =="Information Technology" ):
+            filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+            response = HttpResponse(content_type='text/csv')
+            
+            response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+            writer = csv.writer(response)
+            writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+            for filled_student in filled_student_details:
+                writer.writerow([filled_student.name,
+                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+        
+        elif(admin_type=="Computer"):
+            filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+            response = HttpResponse(content_type='text/csv')
+            
+            response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+            writer = csv.writer(response)
+            writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+            for filled_student in filled_student_details:
+                writer.writerow([filled_student.name,
+                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+        
+        elif(admin_type =="Electronics & Telecommunication" ):
+            filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+            response = HttpResponse(content_type='text/csv')
+            
+            response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+            writer = csv.writer(response)
+            writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+            for filled_student in filled_student_details:
+                writer.writerow([filled_student.name,
+                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+        
+        elif(admin_type =="Electronics" ):
+            filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+            response = HttpResponse(content_type='text/csv')
+            
+            response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+            writer = csv.writer(response)
+            writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+            for filled_student in filled_student_details:
+                writer.writerow([filled_student.name,
+                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number]) 
+        return response
+    
 
 
 @never_cache
@@ -635,18 +770,52 @@ def logout_admin(request):
 
 
 def pdf(request):
-    company = request.GET.get('c')
-    eligible = StudentsEligible.objects.filter(comp_name=company)
-    template = get_template('pdf.html')
-    comps = Company.objects.get(comp_name=company)
-    # context = {eligible}
-    # html = template.render(context)
-    pdf = render_to_pdf('eligible_pdf.html', {'context': eligible, 'company': company, 'comps': comps})
-    return HttpResponse(pdf, content_type='application/pdf')
+    if not request.session.get('admin_login'):
+        return HttpResponseRedirect("/login/")
+    else:
+        admin_type=request.session.get('admin_type')
+        if(admin_type =="Super"):
+            company = request.GET.get('c')
+            students = StudentsEligible.objects.all()
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user,comp_name=company)
+                    else:
+                        eligible = 'nostudents'
+            # eligible = StudentsEligible.objects.filter(comp_name=company)
+            template = get_template('pdf.html')
+            comps = Company.objects.get(comp_name=company)
+            # context = {eligible}
+            # html = template.render(context)
+            pdf = render_to_pdf('eligible_pdf.html', {'context': eligible, 'company': company, 'comps': comps})
+        
+        else:
+            company = request.GET.get('c')
+            students = StudentsEligible.objects.filter(branch=admin_type)
+            for user in students:
+                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
+                for response in stud_interest:
+                    # print('response is ',response.stud_response)
+                    if (int(response.stud_response) == 1):
+                        print('student eligible',response.stud_user)
+                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user,comp_name=company)
+                    else:
+                        eligible = 'nostudents'
+            # eligible = StudentsEligible.objects.filter(comp_name=company)
+            template = get_template('pdf.html')
+            comps = Company.objects.get(comp_name=company)
+            # context = {eligible}
+            # html = template.render(context)
+            pdf = render_to_pdf('eligible_pdf.html', {'context': eligible, 'company': company, 'comps': comps})
+
+        return HttpResponse(pdf, content_type='application/pdf')
 
 def company_details(request):
-
-    if not request.session.get('admin_login', False):
+    if not request.session.get('admin_login'):
         return HttpResponseRedirect("/login/")
     else:
         admin_type=request.session.get('admin_type')

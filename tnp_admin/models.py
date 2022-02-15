@@ -24,6 +24,13 @@ class Company(models.Model):
     instruction = models.CharField(max_length=200)
     campus = models.CharField(max_length=100)
 
+class mailResponse(models.Model):
+    comp_name = models.CharField(max_length=100)
+    stud_user = models.CharField(max_length=100)
+    token = models.CharField(max_length=200)
+    stud_response = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now=True)
+
 
 class resetPassword(models.Model):
     username = models.CharField(max_length=100)

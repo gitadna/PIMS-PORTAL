@@ -26,7 +26,17 @@
 <select name="filter" onchange="form.submit();" class="input-group form-control" style="margin:30px;width:40%;cursor:pointer;">
   <option value="" disabled selected>Sort By</option>
   <option value="Company">Company</option>
-  <option value="Branch">Branch</option>
+  {% if request.session.admin_type == "Super" %}
+    <option value="Branch">Branch</option>
+    {%elif request.session.admin_type == "Information Technology"%}
+    <option value="Branch">IT Students</option>
+    {%elif request.session.admin_type == "Computer"%}
+    <option value="Branch">IT Students</option>
+    {%elif request.session.admin_type == "Electronics & Telecommunication"%}
+    <option value="Branch">IT Students</option>
+    {%elif request.session.admin_type == "Electronics"%}
+    <option value="Branch">IT Students</option>
+    {%endif%}
   <option value="CTC">CTC</option>
 </select>
 <div class="input-group" style="width:40%;margin:30px;">
@@ -140,6 +150,8 @@
 {% else %}
   <p>No students placed yet</p>
 {% endif %}
+<div style="flex-grow: 1;margin-top: 2%;"></div>
+{% include "footer.html" %}
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
