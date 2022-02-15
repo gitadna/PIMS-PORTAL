@@ -268,13 +268,29 @@ def add_admin(request):
             else:
                 addUser = Admin(username=username, password=password, dept=branch, role="TNP Admin", name=name,admin_type=admin_type)
                 addUser.save()
-                send_mail(
-                    'Placement Portal',
-                    'Id: ' + username + '\nPassword: ' + password + '.',
-                    'tnpportal7@gmail.com',
-                     [username],
-                     fail_silently=False,
-                 )
+                # send_mail(
+                #     'Welcome to Placement Information Portal \n Login http://tnpportal.kjsieit.in/',
+                #     'Id: ' + username + '\nPassword: ' + password + '.',
+                #     'tnpportal7@gmail.com',
+                #      [username],
+                #      fail_silently=False,
+                #  )
+                email_boby = """
+                <html>
+                <body>
+                    <h2>Welcome To Placement Information Portal Admin of department %s</h2>
+                <p>Follow up is the credentials for login in to PIMS Portal </p>
+                <p><strong>Username:</strong> %s</p>
+                <p><strong>password:</strong> %s</p>
+                <p>Link of the website is <a href="http://tnpportal.kjsieit.in/">Pims Portal</a>
+
+                </body>
+                </html>
+                """%(admin_type,username,password)
+                
+                email = EmailMessage('Placement',email_boby,"tnpportal7@gmail.com",[username])
+                email.content_subtype = 'html'
+                email.send()
                 msg = {
                     'validate': "Added successfully."
                 }
@@ -315,13 +331,28 @@ def add_user(request):
             else:
                 addUser = User(name=name, username=username, password=password, branch=branch)
                 addUser.save()
-                send_mail(
-                     'Placement Portal',
-                     'Id: ' + username + '\nPassword: ' + password + '.',
-                     'tnpportal7@gmail.com',
-                     [username],
-                     fail_silently=False,
-                 )
+                # send_mail(
+                #      'Placement Portal',
+                #      'Id: ' + username + '\nPassword: ' + password + '.',
+                #      'tnpportal7@gmail.com',
+                #      [username],
+                #      fail_silently=False,
+                #  )
+                email_boby = """
+                <html>
+                <body>
+                    <h2>Welcome To Placement Information Portal Students</h2>
+                <p>Follow up is the credentials for login in to PIMS Portal </p><br>
+                <p>Link of the website is <a href="http://tnpportal.kjsieit.in/">Pims Portal</a>
+                <p><strong>Username:</strong> %s</p>
+                <p><strong>password:</strong> %s</p><br>
+                </body>
+                </html>
+                """%(username,password)
+                
+                email = EmailMessage('Placement',email_boby,"tnpportal7@gmail.com",[username])
+                email.content_subtype = 'html'
+                email.send()
                 msg = {
                     'validate': "Added successfully."
                 }
