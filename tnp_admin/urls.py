@@ -26,7 +26,9 @@ urlpatterns = [
                   path('lockResume', views.lockResume, name="lockResume"),
                   path('add_excel', views.add_excel, name="add_excel"),
                   path('sorting_student', views.sorting_student, name="sorting_student"),
-                  path('student_details', views.filled_student, name="filled-student-details")
+                  path('student_details', views.filled_student, name="filled-student-details"),
+                  path('student_data',views.student_data,name='student-data'),
+                  path('format_of_excel',views.format_of_excel,name='student-excel-format'),
                   
               ]
 

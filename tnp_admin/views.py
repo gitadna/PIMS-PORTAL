@@ -1,6 +1,8 @@
 from itertools import chain
 import string
 import random
+from io import BytesIO as IO
+from urllib import response
 from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail, EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
@@ -19,7 +21,7 @@ from tnp_admin.models import Company
 from secrets import token_urlsafe
 from student.models import Resume
 import urllib.parse
-
+import pandas as pd
 
 @never_cache
 def dashboard(request):
@@ -32,7 +34,6 @@ def dashboard(request):
                 admin = request.session['admin_username']
                 admin_type=request.session['admin_type']
                 # ,admin_type=admin_type
-
                 Admin.objects.filter(username=admin,admin_type=admin_type).update(password=psw)
                 data = Admin.objects.filter(username=admin,admin_type=admin_type)
 
@@ -813,7 +814,7 @@ def pdf(request):
                 for response in stud_interest:
                     # print('response is ',response.stud_response)
                     if (int(response.stud_response) == 1):
-                        print('student eligible',response.stud_user)
+                        # print('student eligible',response.stud_user)
                         eligible = StudentsEligible.objects.filter(stud_user=response.stud_user,comp_name=company)
                     else:
                         eligible = 'nostudents'
@@ -1230,6 +1231,42 @@ def add_excel(request):
                 "invalidate": "Invalid file format.",
                 }
         return render(request, 'add_student.html', msg)
+
+
+
+@never_cache
+def student_data(request):
+    if not request.session.get('admin_login'):
+        return HttpResponseRedirect("/login/")
+    else:
+        if request.method == "POST":
+            student_entries_data = request.FILES['student_data']
+            checking = student_entries_data.name
+            if checking.endswith('.xls') or checking.endswith('.xlsx') or checking.endswith('.XLS') or checking.endswith('.XLSX'):
+                print('proper file')
+    return render(request, 'student_data.html')
+
+@never_cache
+def format_of_excel(request):
+    if not request.session.get('admin_login'):
+        return HttpResponseRedirect("/login/")
+    else:
+        columns = ["GrNo",'Class Code','Sex','Name','SeatNo','Semester1','Semester2',
+        'Semester3','Semester4','Semester5','Semester6','Percentage','PRN no','Contact no','Alternate contact no',
+        'Somaiya ID','non-Somaiya ID']
+        df = pd.DataFrame(columns=columns)
+        df.index.name = 'Sr. No'
+        df.index = df.index + 1
+        wb = openpyxl.Workbook()
+        # ws = wb.get_active_sheet()
+        # df.to_excel('student_data.xlsx')        
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=formatOfStudent.xlsx'
+
+        # df.to_excel("formatOfStudentData.xls")
+
+    return response
+
 
 
 @never_cache
