@@ -1,12 +1,15 @@
+import encodings
 from itertools import chain
 import string
 import random
 from io import BytesIO as IO
+from tkinter import font
 from urllib import response
 from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail, EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
 import csv
+import xlwt
 from django.shortcuts import render
 from django.template.loader import get_template
 from pandas.io.sas.sas_constants import magic
@@ -21,7 +24,6 @@ from tnp_admin.models import Company
 from secrets import token_urlsafe
 from student.models import Resume
 import urllib.parse
-import pandas as pd
 
 @never_cache
 def dashboard(request):
@@ -1243,7 +1245,48 @@ def student_data(request):
             student_entries_data = request.FILES['student_data']
             checking = student_entries_data.name
             if checking.endswith('.xls') or checking.endswith('.xlsx') or checking.endswith('.XLS') or checking.endswith('.XLSX'):
-                print('proper file')
+                wb = openpyxl.load_workbook(student_entries_data)
+                worksheet = wb['Sheet1']
+                excel_data = list()
+                msg = []
+                yes,no = 0,0
+                for i,row in enumerate(worksheet.iter_rows()):
+                    row_data = list()
+                    if(i==0):
+                        continue
+                    for cell in row:
+                        row_data.append(str(cell.value))
+                    excel_data.append(row_data)
+                for add in excel_data:
+                    sr_no = add[0]
+                    gr_no = add[1]
+                    branch = add[2]
+                    gender = add[3]
+                    name = add[4]
+                    somaiya_id = add[5]
+                    non_somaiya_id = add[6]
+                    prn_number = add[7]
+                    seat_no = add[8]
+                    sem1 = add[9]
+                    sem2 = add[10]
+                    sem3 = add[11]
+                    sem4= add[12]
+                    sem5 = add[13]
+                    sem6 = add[14]
+                    percentage = add[15]
+                    contact_no = add[16]
+                    alt_contact_no = add[17]
+                    if(User.objects.filter(username=somaiya_id).exists()):
+                        print('helo')
+                        # userData = Resume(number=prn_number,
+                        # name=name,user=somaiya_id,
+                        # gender=gender,phone=contact_no,)
+                    else:
+                        print('user')
+
+
+
+                    
     return render(request, 'student_data.html')
 
 @never_cache
@@ -1251,17 +1294,24 @@ def format_of_excel(request):
     if not request.session.get('admin_login'):
         return HttpResponseRedirect("/login/")
     else:
-        columns = ["GrNo",'Class Code','Sex','Name','SeatNo','Semester1','Semester2',
-        'Semester3','Semester4','Semester5','Semester6','Percentage','PRN no','Contact no','Alternate contact no',
-        'Somaiya ID','non-Somaiya ID']
-        df = pd.DataFrame(columns=columns)
-        df.index.name = 'Sr. No'
-        df.index = df.index + 1
-        wb = openpyxl.Workbook()
-        # ws = wb.get_active_sheet()
-        # df.to_excel('student_data.xlsx')        
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename=formatOfStudent.xlsx'
+        columns = [
+        "Sr.no","GrNo",'Branch','Sex','Name',
+        'Somaiya ID','non-Somaiya ID','PRN no','SeatNo','Semester1',
+        'Semester2','Semester3','Semester4','Semester5','Semester6',
+        'Percentage','Contact no','Alternate contact no',
+        ]
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=formatOfStudent.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet('Sheet1')
+        row_nums = 0
+        font_style= xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col in range(len(columns)):
+            ws.write(row_nums,col,columns[col],font_style)
+        
+        wb.save(response)
 
         # df.to_excel("formatOfStudentData.xls")
 
