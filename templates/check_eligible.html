@@ -58,7 +58,7 @@
 <tbody>
     {% for student in temp %}
     {% for obj in studentObj %}
-    {% if student == obj.user %}
+    {% if student == obj.somaiya_id %}
     <tr>
         <th scope="row">{{ forloop.counter }}</th>
         <td>{{ obj.name }}</td>

@@ -77,99 +77,78 @@
     	<th style="color: #DA0833">Username</th>
     	<th style="color: #DA0833">PRN Number</th>
     	<th style="color: #DA0833">Branch</th>
+      <th style="color: #DA0833">SSC Marks</th>
+      <th style="color: #DA0833">HSC/Diploma Marks</th>
     	<th style="color: #DA0833">Sem 1 Marks</th>
-    	<th style="color: #DA0833">Sem 1 Copy</th>
     	<th style="color: #DA0833">Sem 2 Marks</th>
-    	<th style="color: #DA0833">Sem 2 Copy</th>
     	<th style="color: #DA0833">Sem 3 Marks</th>
-        <th style="color: #DA0833">Sem 3 Copy</th>
         <th style="color: #DA0833">Sem 4 Marks</th>
-        <th style="color: #DA0833">Sem 4 Copy</th>
         <th style="color: #DA0833">Sem 5 Marks</th>
-        <th style="color: #DA0833">Sem 5 Copy</th>
         <th style="color: #DA0833">Sem 6 Marks</th>
-        <th style="color: #DA0833">Sem 6 Copy</th>
         <th style="color: #DA0833">Aggregate</th>
-        <th style="color: #DA0833">SSC Marks</th>
-        <th style="color: #DA0833">SSC Copy</th>
-        <th style="color: #DA0833">HSC/Diploma Marks</th>
-        <th style="color: #DA0833">HSC/Diploma Copy</th>
     </tr>
   </thead>
   <tbody id="myTable">
   {% for resume in userDetails %}
     <tr>
 <td>{% if resume.lock == True %}
-    <a href="/tnp_admin/unlockResume?s={{ resume.user }}">Unlock Resume</a>
+    <a href="/tnp_admin/unlockResume?s={{ resume.somaiya_id }}">Unlock Resume</a>
     {% else %}
-    <a href="/tnp_admin/lockResume?s={{ resume.user }}">Lock Resume</a>
+    <a href="/tnp_admin/lockResume?s={{ resume.somaiya_id }}">Lock Resume</a>
     {% endif %}</td>
-    <td><a href="/tnp_admin/delete_resume?s={{ resume.user }}">Delete Student</a></td>
-              <td>{{ resume.name }}</td>
-            <td>{{ resume.user }}</td>
-            <td>{{ resume.number }}</td>
+    <td><a href="/tnp_admin/delete_resume?s={{ resume.somaiya_id }}">Delete Student</a></td>
+            <td>{{ resume.name }}</td>
+            <td>{{ resume.somaiya_id }}</td>
+            <td>{{ resume.prn_number }}</td>
             <td>{{ resume.branch }}</td>
+            <td>{{ resume.ssc_marks }}</td>
+            {% if resume.diploma == None %}
+              <td>HSC Marks {{ resume.hsc_marks }}</td>
+            {% else %}
+              <td>Diploma Marks {{ resume.diploma }}</td>
+            {% endif %}
 
                 {% if resume.sem1 == None %}
                 <td>N.A.</td>
-                <td>N.A.</td>
                 {% else %}
                 <td>{{ resume.sem1 }}</td>
-                <td><a href="{{ resume.sem1f.url }}" target="_blank">View</a></td>
                 {% endif %}
 
                 {% if resume.sem2 == None %}
                 <td>N.A.</td>
-                <td>N.A.</td>
                 {% else %}
                 <td>{{ resume.sem2 }}</td>
-                <td><a href="{{ resume.sem2f.url }}" target="_blank">View</a></td>
                 {% endif %}
 
                 {% if resume.sem3 == None %}
                 <td>-</td>
-                <td>-</td>
                 {% else %}
                 <td>{{ resume.sem3 }}</td>
-                <td><a href="{{ resume.sem3f.url }}" target="_blank">View</a></td>
                 {% endif %}
 
                 {% if resume.sem4 == None %}
                 <td>-</td>
-                <td>-</td>
                 {% else %}
                 <td>{{ resume.sem4 }}</td>
-                <td><a href="{{ resume.sem4f.url }}" target="_blank">View</a></td>
                 {% endif %}
 
                 {% if resume.sem5 == None %}
                 <td>-</td>
-                <td>-</td>
                 {% else %}
                 <td>{{ resume.sem5 }}</td>
-                <td><a href="{{ resume.sem5f.url }}" target="_blank">View</a></td>
                 {% endif %}
 
                 {% if resume.sem6 == None %}
                 <td>-</td>
-                <td>-</td>
                 {% else %}
                 <td>{{ resume.sem6 }}</td>
-                <td><a href="{{ resume.sem6f.url }}" target="_blank">View</a></td>
                 {% endif %}
 
-                <td>{{ resume.sperc }}</td>
+                <td>{{ resume.agg }}</td>
 
-                <td>{{ resume.ssc_marks }}</td>
-                <td><a href="{{ resume.sscf.url }}" target="_blank">View</a></td>
+                
 
-                {% if resume.diploma == None %}
-                <td>{{ resume.hsc_marks }}</td>
-                <td><a href="{{ resume.hscf.url }}" target="_blank">View</a></td>
-                {% else %}
-                <td>{{ resume.diploma }}</td>
-                <td><a href="{{ resume.diplomaf.url }}" target="_blank">View</a></td>
-                {% endif %}
+                
 
     </tr>
    {% endfor %}
@@ -253,7 +232,7 @@ $('table.table1').DataTable();
 </script>
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>

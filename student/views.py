@@ -564,13 +564,13 @@ def resume_update(request):
                #     if sem7f.size > MAX_UPLOAD_SIZE:
                 #        error.append("Sem 7 file upload size less than 1.0 MB")
                  #   else:
- #                       pageObj.sem7f = sem7f
+        #                       pageObj.sem7f = sem7f
 
-#                if sem8f is not None:
- #                   if sem8f.size > MAX_UPLOAD_SIZE:
-  #                      error.append("Sem 8 file upload size less than 1.0 MB")
-   #                 else:
-    #                    pageObj.sem8f = sem8f
+        #                if sem8f is not None:
+        #                   if sem8f.size > MAX_UPLOAD_SIZE:
+        #                      error.append("Sem 8 file upload size less than 1.0 MB")
+        #                 else:
+            #                    pageObj.sem8f = sem8f
 
                 if sem3 != "":
                     if any(c.isalpha() for c in sem3) == True or float(sem3) > 10:
@@ -591,11 +591,11 @@ def resume_update(request):
      #           if sem7 != "":
       #              if any(c.isalpha() for c in sem7) == True or float(sem7) > 10:
        #                 error.append("Invalid Sem 7 marks.")
-#
- #               if sem8 != "":
-  #                  if any(c.isalpha() for c in sem8) == True or float(sem8) > 10:
-   #                     error.append("Invalid Sem 8 marks.")
-#
+        #
+        #               if sem8 != "":
+        #                  if any(c.isalpha() for c in sem8) == True or float(sem8) > 10:
+        #                     error.append("Invalid Sem 8 marks.")
+        #
                 if any(c.isalpha() for c in aggregate) == True or float(aggregate) > 10:
                     error.append("Invalid Aggregate marks.")
 
