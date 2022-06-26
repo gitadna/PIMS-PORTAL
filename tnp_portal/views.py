@@ -22,6 +22,7 @@ def login(request):
 
         if student:
             request.session['student_login'] = True
+            request.session.set_expiry(request.session.get_expiry_age())
             request.session['username'] = user
             return HttpResponseRedirect("/student/resume/")
 
@@ -43,6 +44,7 @@ def login(request):
                 request.session['admin_type']= 'Electronics'
             request.session['admin_login'] = True
             request.session['admin_username'] = user
+            request.session.set_expiry(request.session.get_expiry_age())
 
 
             return HttpResponseRedirect("/tnp_admin/")

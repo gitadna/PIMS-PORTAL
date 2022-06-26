@@ -29,15 +29,15 @@
     <div class="container">
         <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
             <form method="POST" action="/tnp_admin/student_data" enctype="multipart/form-data">
-                {% csrf_token %}
+                {% csrf_token %}                
                 {% if yes_count or no_count %}
-                    {% if yes_count.count > 0 %}
-                        <p>All Students added Succesfully {{yes_count}}</p>
+                    {% if yes_count > 0 %}
+                        <p>All Students added Succesfully</p>
                     {% else %}
                         <p>{{msg}}</p>
                     {%endif%}
                 {%endif%}
-                <p>Upload .xls or .xlsx of given format. <strong> <a href="/tnp_admin/format_of_excel" class="details" target="_blank"> Click here </a></strong> to download the given format</p>
+                <p>Upload .xls or .xlsx or .csv of given format. <strong> <a href="/tnp_admin/format_of_excel" class="details" target="_blank"> Click here </a></strong> to download the given format</p>
                 
                 <input type="file" class="form-control input-lg" name="student_data" accept=".xls,.xlsx,.csv" required>
                 <input type="submit" class="btn btn-primary" value="Upload Student Excel">

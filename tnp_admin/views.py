@@ -525,13 +525,9 @@ def display_company(request):
         types=request.session.get('admin_type')
         if (types=="Super"):
             comp = Company.objects.all().order_by('-id')
-            # stud = StudentsEligible.objects.filter(Q(stud_user__in=mailResponse.objects.filter(stud_response=1).values('stud_user')) & Q(comp_name__in=mailResponse.objects.filter(stud_response=1).values('comp_name')))
-            # print('stud',stud.values())
-            cursor = connection.cursor()
-            cursor.execute('SELECT * FROM tnp_admin_studentseligible join tnp_admin_company on tnp_admin_company.comp_name=tnp_admin_studentseligible.comp_name join tnp_admin_mailresponse on tnp_admin_studentseligible.stud_user = tnp_admin_mailresponse.stud_user and tnp_admin_mailresponse.comp_name=tnp_admin_company.comp_name where tnp_admin_mailresponse.stud_response=1')
-            # print('result',cursor.fetchall())
-            # row = cursor.fetchall()
+            # stud = StudentsEligible.objects.filter(Q(stud_user__in=mailResponse.objects.filter(stud_response=1).values('stud_user')) & Q(comp_name__in=mailResponse.objects.filter(stud_response=1).values('comp_name')))            
             stud = StudentsEligible.objects.raw('SELECT * FROM tnp_admin_studentseligible join tnp_admin_company on tnp_admin_company.comp_name=tnp_admin_studentseligible.comp_name join tnp_admin_mailresponse on tnp_admin_studentseligible.stud_user = tnp_admin_mailresponse.stud_user and tnp_admin_mailresponse.comp_name=tnp_admin_company.comp_name where tnp_admin_mailresponse.stud_response=1')
+            # print('expiry age',request.session.get_expiry_age())
             # list_of_student = {}
             # i=0
             # for p in stud:
@@ -548,28 +544,12 @@ def display_company(request):
 
             else:
                 return render(request, 'display_company.html')
-        else:
-            company_branch = Company.objects.all().values_list('branch',flat=True)
-            if(company_branch.count() >0 ):
-                for branches in company_branch:
-                    branch = branches.split(',')
-                    if(types in branch):
-                        print('branch',branch)
-                        company = Company.objects.filter(Q(branch__in=branch) | Q(branch=types)).order_by('-id')
-                        print('company',company.values())
-                    # for i in branches:
-                    #     all_branch = i.split(',')
-                    # if (types in all_branch and (len(all_branch)>=1)):
-                    #     comp = Company.objects.filter(Q(branch__in=branches) | Q(branch=types)).order_by('-id')
-                    #     students = StudentsEligible.objects.filter(Q(stud_user__in=mailResponse.objects.filter(stud_response=1).values('stud_user')) & Q(comp_name__in=mailResponse.objects.filter(stud_response=1).values('comp_name')),branch=types)
-                    #     print('student',students.values_list('stud_name',flat=True))
-            stud = StudentsEligible.objects.raw(f"SELECT * FROM tnp_admin_studentseligible join tnp_admin_company on tnp_admin_company.comp_name=tnp_admin_studentseligible.comp_name join tnp_admin_mailresponse on tnp_admin_studentseligible.stud_user = tnp_admin_mailresponse.stud_user and tnp_admin_mailresponse.comp_name=tnp_admin_company.comp_name where tnp_admin_mailresponse.stud_response=1 and match (tnp_admin_company.branch) against ({types}) and tnp_admin_studentseligible.branch = {types}")
+        else:           
+            stud = StudentsEligible.objects.raw(f"SELECT * FROM tnp_admin_studentseligible join tnp_admin_company on tnp_admin_company.comp_name=tnp_admin_studentseligible.comp_name join tnp_admin_mailresponse on tnp_admin_studentseligible.stud_user = tnp_admin_mailresponse.stud_user and tnp_admin_mailresponse.comp_name=tnp_admin_company.comp_name where tnp_admin_mailresponse.stud_response=1 and match (tnp_admin_company.branch) against ('{types}') and tnp_admin_studentseligible.branch = '{types}'")
+            company = Company.objects.raw(f"SELECT * FROM `tnp_admin_company` where match (tnp_admin_company.branch) against ('{types}')")
             
-            print(f"SELECT * FROM tnp_admin_studentseligible join tnp_admin_company on tnp_admin_company.comp_name=tnp_admin_studentseligible.comp_name join tnp_admin_mailresponse on tnp_admin_studentseligible.stud_user = tnp_admin_mailresponse.stud_user and tnp_admin_mailresponse.comp_name=tnp_admin_company.comp_name where tnp_admin_mailresponse.stud_response=1 and match (tnp_admin_company.branch) against ({types}) and tnp_admin_studentseligible.branch = {types}",stud)
-            comp = Company.objects.filter(branch=types).order_by('-id')
-            students = StudentsEligible.objects.filter(Q(stud_user__in=mailResponse.objects.filter(stud_response=1).values('stud_user')) & Q(comp_name__in=mailResponse.objects.filter(stud_response=1).values('comp_name')),branch=types)
-            if comp.count() > 0:
-                return render(request, 'display_company.html', {'comps': comp, 'eligibles': students,'admin_specific':True})
+            if len(company) > 0:
+                return render(request, 'display_company.html', {'comps': company, 'eligibles': stud})
             else:
                 return render(request, 'display_company.html')
         
@@ -585,7 +565,7 @@ def student_placed(request):
         user = request.GET.get('s')
         company = request.GET.get('c')
         comps = Company.objects.get(comp_name=company)
-        student = Resume.objects.get(user=user)
+        student = Resume.objects.get(somaiya_id=user)
         send_mail(
             'Placement',
             'Congratulations you have been placed in ' + company + '.',
@@ -594,9 +574,9 @@ def student_placed(request):
             fail_silently=False
         )
         studentPlaced = StudentPlaced(stud_name=student.name, stud_user=user, branch=student.branch, comp_name=company,
-                                      ctc=comps.ctc, id_no=student.number)
+                                      ctc=comps.ctc, id_no=student.prn_number)
         studentPlaced.save()
-        resumeUpdate = Resume.objects.get(user=user)
+        resumeUpdate = Resume.objects.get(somaiya_id=user)
         if comps.ctc < 600000:
             resumeUpdate.oneto6 = company
             resumeUpdate.save()
@@ -606,12 +586,16 @@ def student_placed(request):
             for e in eligible_comp:
                 if StudentsEligible.objects.filter(stud_user=user, comp_name=e['comp_name']).exists():
                     elig = StudentsEligible.objects.get(stud_user=user, comp_name=e['comp_name'])
+                    mail = mailResponse.objects.get(stud_user=user, comp_name=e['comp_name'])
+                    mail.delete()
                     elig.delete()
         else:
             resumeUpdate.dream = company
             resumeUpdate.save()
 
             eligible = StudentsEligible.objects.get(stud_user=user, comp_name=company)
+            mail = mailResponse.objects.get(stud_user=user, comp_name=company)
+            mail.delete()
             eligible.delete()
         return HttpResponseRedirect("/tnp_admin/display_company")
 
@@ -780,17 +764,7 @@ def pdf(request):
         admin_type=request.session.get('admin_type')
         if(admin_type =="Super"):
             company = request.GET.get('c')
-            students = StudentsEligible.objects.all()
-            for user in students:
-                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
-                for response in stud_interest:
-                    # print('response is ',response.stud_response)
-                    if (int(response.stud_response) == 1):
-                        # print('student eligible',response.stud_user)
-                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user,comp_name=company)
-                    else:
-                        eligible = 'nostudents'
-            # eligible = StudentsEligible.objects.filter(comp_name=company)
+            eligible = StudentsEligible.objects.filter(comp_name=company)
             template = get_template('pdf.html')
             comps = Company.objects.get(comp_name=company)
             # context = {eligible}
@@ -799,17 +773,7 @@ def pdf(request):
         
         else:
             company = request.GET.get('c')
-            students = StudentsEligible.objects.filter(branch=admin_type)
-            for user in students:
-                stud_interest = mailResponse.objects.filter(stud_user = user.stud_user)
-                for response in stud_interest:
-                    # print('response is ',response.stud_response)
-                    if (int(response.stud_response) == 1):
-                        print('student eligible',response.stud_user)
-                        eligible = StudentsEligible.objects.filter(stud_user=response.stud_user,comp_name=company)
-                    else:
-                        eligible = 'nostudents'
-            # eligible = StudentsEligible.objects.filter(comp_name=company)
+            eligible = StudentsEligible.objects.filter(comp_name=company,branch=admin_type)
             template = get_template('pdf.html')
             comps = Company.objects.get(comp_name=company)
             # context = {eligible}
@@ -840,41 +804,16 @@ def company_details(request):
                 else:
                     comps = comps + 1
 
-            pdf=render_to_pdf('company_details.html',{'details':details,'it': it, 'extc': extc, 'etrx': etrx, 'comps': comps})
+            pdf=render_to_pdf('company_details.html',{'details':details,'it': it, 'extc': extc, 'etrx': etrx, 'comps': comps,'admin_type':admin_type})
             return HttpResponse(pdf,content_type='application/pdf')
-        if (admin_type=="Information Technology"):
-            details=Company.objects.filter(branch=admin_type)
+        else:
+            details = Company.objects.raw(f"SELECT * FROM `tnp_admin_company` where match (tnp_admin_company.branch) against ('{admin_type}')")
             student=StudentPlaced.objects.filter(branch=admin_type)
-            it=0
+            student_placed=0
             for place in student:
-                it+=1
-
-            pdf=render_to_pdf('company_details.html',{'details':details,'student':student,'it':it})
-            return HttpResponse(pdf,content_type='application/pdf')
-        if (admin_type=="Computer"):
-            details=Company.objects.filter(branch=admin_type)
-            student=StudentPlaced.objects.filter(branch=admin_type)
-            comps=0
-            for place in student:
-                comps+=1
-            pdf=render_to_pdf('company_details.html',{'details':details,'student':student,'comps':comps})
-            return HttpResponse(pdf,content_type='application/pdf')
-        if (admin_type=="Electronics & Telecommunication"):
-            details=Company.objects.filter(branch=admin_type)
-            student=StudentPlaced.objects.filter(branch=admin_type)
-            extc=0
-            for place in student:
-                extc+=1
-            pdf=render_to_pdf('company_details.html',{'details':details,'student':student,'extc':extc})
-            return HttpResponse(pdf,content_type='application/pdf')
-        if (admin_type=="Electronics"):
-            details=Company.objects.filter(branch=admin_type)
-            student=StudentPlaced.objects.filter(branch=admin_type)
-            etrx=0
-            for place in student:
-                etrx+=1
-            pdf=render_to_pdf('company_details.html',{'details':details,'student':student,'etrx':etrx})
-            return HttpResponse(pdf,content_type='application/pdf')
+                student_placed+=1
+            pdf=render_to_pdf('company_details.html',{'details':details,'student':student,'student_placed':student_placed,"admin_type":admin_type})
+            return HttpResponse(pdf,content_type='application/pdf')        
 
 def sorting_student(request):
     if not request.session.get('admin_login'):
@@ -1213,15 +1152,17 @@ def student_data(request):
     if not request.session.get('admin_login'):
         return HttpResponseRedirect("/login/")
     else:
-
+        
         if request.method == "POST":
             student_entries_data = request.FILES['student_data']
             checking = student_entries_data.name
             msg = ""
             yes,no=0,0
             if checking.lower().endswith('.xls') or checking.lower().endswith('.xlsx') or checking.lower().endswith('.csv'):
-                # print('proper file format')
-                student_data = pd.read_csv(student_entries_data,encoding='utf-8')
+                if(checking.lower().endswith('.xls') or checking.lower().endswith('.xlsx')):
+                    student_data = pd.read_excel(student_entries_data)
+                else:
+                    student_data = pd.read_csv(student_entries_data,encoding='utf-8')
                 for student in student_data.itertuples():
                     # print('student in data',student.college_id_no)
                     if(User.objects.filter(username=student.somaiya_email_ID).exists()):
@@ -1229,65 +1170,69 @@ def student_data(request):
                             no+=1
                             msg += f"{student.somaiya_email_ID} Data Already exist \n"
                         else:
-                            if(pd.isna(student.diploma_marks)):
-                                obj = Resume.objects.create(
-                                prn_number=student.prn_no,
-                                name=student.student_name,
-                                college_id=student.college_id_no,
-                                somaiya_id=student.somaiya_email_ID,
-                                non_somiya_id= student.non_somaiya_email_ID,
-                                branch=student.branch,
-                                gender=student.gender,
-                                diploma=None,
-                                sem1=student.sem_1,
-                                sem2=student.sem_2,
-                                ssc_marks=student.marks_10,
-                                hsc_marks=student.marks_12,
-                                sem3=student.sem_3,
-                                sem4=student.sem_4,
-                                sem5=student.sem_5,
-                                sem6= student.sem_6,
-                                agg=student.average_percentage,
-                                nearest_railway_station= student.nearest_railway_station,
-                                home_Town=student.home_Town,
-                                average_CGPA=student.average_CGPA,
-                                lock=True
-                                )
-                                # print(obj)
-                                obj.save()
-                            else:
-                                obj = Resume.objects.create(
-                                prn_number=student.prn_no,
-                                college_id=student.college_id_no,
-                                name=student.student_name,
-                                somaiya_id=student.somaiya_email_ID,
-                                non_somiya_id= student.non_somaiya_email_ID,
-                                branch=student.branch,
-                                gender=student.gender,
-                                diploma=student.diploma_marks,
-                                sem1=None,
-                                sem2=None,
-                                ssc_marks=student.marks_10,
-                                hsc_marks=None,
-                                sem3=student.sem_3,
-                                sem4=student.sem_4,
-                                sem5=student.sem_5,
-                                sem6= student.sem_6,
-                                agg=student.average_percentage,
-                                nearest_railway_station= student.nearest_railway_station,
-                                home_Town=student.home_Town,
-                                average_CGPA=student.average_CGPA,
-                                lock=True
-                                )
-                                obj.save()
-                                print('student is from diploma',student)
-                            # obj = Resume()
-                            yes+=1
+                            try:
+                                if(pd.isna(student.diploma_marks)):
+                                    obj = Resume.objects.create(
+                                    prn_number=student.prn_no,
+                                    name=student.student_name,
+                                    college_id=student.college_id_no,
+                                    somaiya_id=student.somaiya_email_ID,
+                                    non_somiya_id= student.non_somaiya_email_ID,
+                                    branch=student.branch,
+                                    gender=student.gender,
+                                    diploma=None,
+                                    sem1=student.sem_1,
+                                    sem2=student.sem_2,
+                                    ssc_marks=student.marks_10,
+                                    hsc_marks=student.marks_12,
+                                    sem3=student.sem_3,
+                                    sem4=student.sem_4,
+                                    sem5=student.sem_5,
+                                    sem6= student.sem_6,
+                                    agg=student.average_percentage,
+                                    nearest_railway_station= student.nearest_railway_station,
+                                    home_Town=student.home_Town,
+                                    average_CGPA=student.average_CGPA,
+                                    lock=True
+                                    )
+                                    # print(obj)
+                                    obj.save()
+                                else:
+                                    obj = Resume.objects.create(
+                                    prn_number=student.prn_no,
+                                    college_id=student.college_id_no,
+                                    name=student.student_name,
+                                    somaiya_id=student.somaiya_email_ID,
+                                    non_somiya_id= student.non_somaiya_email_ID,
+                                    branch=student.branch,
+                                    gender=student.gender,
+                                    diploma=student.diploma_marks,
+                                    sem1=None,
+                                    sem2=None,
+                                    ssc_marks=student.marks_10,
+                                    hsc_marks=None,
+                                    sem3=student.sem_3,
+                                    sem4=student.sem_4,
+                                    sem5=student.sem_5,
+                                    sem6= student.sem_6,
+                                    agg=student.average_percentage,
+                                    nearest_railway_station= student.nearest_railway_station,
+                                    home_Town=student.home_Town,
+                                    average_CGPA=student.average_CGPA,
+                                    lock=True
+                                    )
+                                    obj.save()
+                                    # print('student is from diploma',student)
+                                # obj = Resume()
+                                yes+=1
+                            except Exception as e:
+                                no+=1
+                                msg+="Please fill the information properly"
+                                print('error',e)                            
                             # print('studnet passed from 12',pd.isna(student.marks_12))
                     else:
                         no+=1
                         msg += f"Student with email id {student.somaiya_email_ID} does not exist \n"
-                        print('not sxist')
             else:
                 msg += 'File is not a proper format'
             return render(request, 'student_data.html',{'yes_count':yes,"no_count":no,"msg":msg})
@@ -1299,10 +1244,11 @@ def format_of_excel(request):
         return HttpResponseRedirect("/login/")
     else:
         columns = [
-        "Sr.no","GrNo",'Branch','Sex','Name',
-        'Somaiya ID','non-Somaiya ID','PRN no','SeatNo','Semester1',
-        'Semester2','Semester3','Semester4','Semester5','Semester6',
-        'Percentage','Contact no','Alternate contact no',
+        "Sr.no","prn_no",'college_id_no','student_name','branch','gender',
+        'somaiya_email_ID','non_somaiya_email_ID','diploma_marks','marks_12','marks_10',
+        'sem_1','sem_2','sem_3','sem_4','sem_5',"sem_6",
+        'average_percentage',"average_CGPA",'Contact no','Alternate contact no',
+        'home_Town','nearest_railway_station'
         ]
         response = HttpResponse(content_type='application/ms-excel')
         response['Content-Disposition'] = 'attachment; filename=formatOfStudent.xls'

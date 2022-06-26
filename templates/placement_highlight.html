@@ -1,297 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 {% load static %}
 <html class="no-js" lang="en">
-    <head>
-      
-<!-- Start Open Web Analytics Tracker -->
-<script type="text/javascript">
-//<![CDATA[
-var owa_baseUrl = '//localhost/Open-Web-Analytics-1.7.3/';
-var owa_cmds = owa_cmds || [];
-owa_cmds.push(['setSiteId', 'cea78186b3a1a9874b7bcad9241409d6']);
-owa_cmds.push(['trackPageView']);
-owa_cmds.push(['trackClicks']);
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>KJSIEIT | Placement</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-(function() {
-    var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
-    owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(//, 'https:') : owa_baseUrl );
-    _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
-    var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
-}());
-//]]>
-</script>
-<!-- End Open Web Analytics Code -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>KJSIEIT | Placement</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- All Plugin Css -->
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}" />
 
-        <!-- All Plugin Css -->
-		<link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <!-- Style & Common Css -->
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 
-		<!-- Style & Common Css -->
-		<link rel="stylesheet" href="{% static 'css/common.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+      #chartdiv {
+        width: 80%;
+        height: 300px;
+      }
+      #chartdivs {
+        width: 80%;
+        height: 300px;
+      }
+    </style>
+  </head>
 
-		<style>
-#chartdiv {
-  width: 80%;
-  height: 300px;
-}
-#chartdivs {
-  width: 80%;
-  height: 300px;
-}
-
-</style>
-
-    </head>
-
-<body>
-
+  <body>
     <!-- Navigation Start  -->
-		{% include "home_dashboard.html" %}
-		<!-- Navigation End  -->
+    {% include "home_dashboard.html" %}
+    <!-- Navigation End  -->
 
-	<input type="text" value="{{ extc }}" id="extc" hidden>
-	<input type="text" value="{{ etrx }}" id="etrx" hidden>
-	<input type="text" value="{{ comps }}" id="comps" hidden>
-	<input type="text" value="{{ it }}" id="it" hidden>
-                                <section class="profile-detail">
-                                            <div class="container">
-                                                <div class="col-md-12">
-                                                    <div class="row">
+    <input type="text" value="{{ extc }}" id="extc" hidden />
+    <input type="text" value="{{ etrx }}" id="etrx" hidden />
+    <input type="text" value="{{ comps }}" id="comps" hidden />
+    <input type="text" value="{{ it }}" id="it" hidden />
+    <section class="profile-detail">
+      <div class="container">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-heading" style="font-size: 30px; color: maroon">
+                <i class=""></i> Placement Highlights (Current Year)
+              </div>
+              <br />
+              <center><div id="chartdivs"></div></center>
+            </div>
 
-													<div class="panel panel-default">
-								<div class="panel-heading" style="font-size: 30px;color: maroon;>
-									<i class="" ></i> Placement Highlights (Current Year)
-								</div>
-														<br>
-														<center><div id="chartdivs"></div></center>
-											</div>
+            <div class="panel panel-default">
+              <div class="panel-heading" style="font-size: 30px; color: maroon">
+                <i class=""></i> Placement Highlights (Previous Year)
+              </div>
+              <div id="chartdiv"></div>
+            </div>
+            <div class="basic-information">
+              <div class="panel panel-default">
+                <div
+                  class="panel-heading"
+                  style="font-size: 30px; color: maroon"
+                >
+                  <i class=""></i> Carrier Support Opportunities:
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                  <ul>
+                    <li>Expert Talks by National , International Speakers.</li>
+                    <li>Interview Guidance</li>
+                    <li>Center of Excellence</li>
+                    <li>Robotic Automation</li>
+                    <li>Grooming Sessions by Alumni</li>
+                    <li>Software Development Cell</li>
+                    <li>Job Fair</li>
+                    <li>Internship</li>
+                    <li>Riidl Startup</li>
+                    <li>Joint Placement Drives</li>
+                  </ul>
+                </div>
+              </div>
 
-														<div class="panel panel-default">
-								<div class="panel-heading" style="font-size: 30px;color: maroon;>
-									<i class="" ></i> Placement Highlights (Previous Year)
-								</div>
-														<div id="chartdiv"></div>
-											</div>
-                                                        <div class="basic-information">
-                                <div class="panel panel-default">
-								<div class="panel-heading"style="font-size: 30px;color: maroon;">
-									<i class=""></i> Carrier Support Opportunities:
-								</div>
-													<!-- /.panel-heading -->
-								<div class="panel-body">
+              <div class="panel panel-default">
+                <div
+                  class="panel-heading"
+                  style="font-size: 30px; color: maroon"
+                >
+                  <i class=""></i> Placement Process:
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                  <span class="service-tag"
+                    >Signups from Interested Students</span
+                  >
+                  <span class="service-tag">Pre Placement Talk</span>
+                  <span class="service-tag">Selection Process</span>
+                  <span class="service-tag">Result Declaration</span>
+                  <span class="service-tag">Email Communication</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-								<ul>
-									<li >Expert Talks by National , International Speakers.</li>
-									<li>Interview Guidance</li>
-									<li>Center of Excellence</li>
-									<li>Robotic Automation</li>
-									<li>Grooming Sessions by Alumni</li>
-									<li>Software Development Cell</li>
-									<li>Job Fair</li>
-									<li>Internship</li>
-									<li>Riidl Startup</li>
-									<li>Joint Placement Drives</li>
-								</ul>
-								</div>
-							</div>
+    {% include "footer.html" %}
 
-							<div class="panel panel-default">
-								<div class="panel-heading" style="font-size: 30px;color: maroon;>
-									<i class=""></i> Placement Process:
-								</div>
-													<!-- /.panel-heading -->
-								<div class="panel-body">
-								<span class="service-tag">Signups from Interested Students</span>
-								<span class="service-tag">Pre Placement Talk</span>
-								<span class="service-tag">Selection Process</span>
-								<span class="service-tag">Result Declaration</span>
-								<span class="service-tag">Email Communication</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+    <script
+      type="text/javascript"
+      src="{% static 'js/jquery.min.js' %}"
+    ></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script
+      type="text/javascript"
+      src="{% static 'js/owl.carousel.min.js' %}"
+    ></script>
+    <script src="{% static 'js/bootsnav.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
+    <!-- Resources -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/moonrisekingdom.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
+    <!-- Chart code -->
+    <script>
+      am4core.ready(function () {
+        // Themes begin
 
-        {% include "footer.html" %}
+        //am4core.useTheme(am4themes_moonrisekingdom);
+        //am4core.useTheme(am4themes_spiritedaway);
+        am4core.useTheme(am4themes_moonrisekingdom);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
 
-		<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-		<script src="{% static 'js/bootstrap.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
-		<script src="{% static 'js/bootsnav.js' %}"></script>
-		<script src="{% static 'js/main.js' %}"></script>
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        chart.colors.step = 2;
 
+        chart.legend = new am4charts.Legend();
+        chart.legend.position = "top";
+        chart.legend.paddingBottom = 20;
+        chart.legend.labels.template.maxWidth = 95;
 
+        var xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        xAxis.dataFields.category = "category";
+        xAxis.renderer.cellStartLocation = 0.1;
+        xAxis.renderer.cellEndLocation = 0.9;
+        xAxis.renderer.grid.template.location = 0;
+        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.title.text = "Student Placed (%)";
+        valueAxis.title.fontWeight = "bold";
+        valueAxis.min = 0;
+        valueAxis.max = 100;
 
-<!-- Resources -->
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/themes/moonrisekingdom.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+        function createSeries(value, name) {
+          var series = chart.series.push(new am4charts.ColumnSeries());
+          series.dataFields.valueY = value;
+          series.dataFields.categoryX = "category";
+          series.name = name;
 
-<!-- Chart code -->
-<script>
-am4core.ready(function() {
+          series.events.on("hidden", arrangeColumns);
+          series.events.on("shown", arrangeColumns);
 
-// Themes begin
+          var bullet = series.bullets.push(new am4charts.LabelBullet());
+          bullet.interactionsEnabled = false;
+          bullet.dy = 20;
 
-//am4core.useTheme(am4themes_moonrisekingdom);
-//am4core.useTheme(am4themes_spiritedaway);
-am4core.useTheme(am4themes_moonrisekingdom);
-am4core.useTheme(am4themes_animated);
-// Themes end
+          // bullet.label.text = '{valueY}'
+          //    bullet.label.fill = am4core.color('#ffffff')
 
+          return series;
+        }
 
+        chart.data = [
+          {
+            category: "COMPS",
+            first: 100,
+            second: 70.31,
+            third: 69.23,
+            forth: 80,
+          },
+          {
+            category: "IT",
+            first: 81.48,
+            second: 86.44,
+            third: 92.72,
+            forth: 91.25,
+          },
+          {
+            category: "EXTC",
+            first: 77.89,
+            second: 68.6,
+            third: 43,
+            forth: 40,
+          },
+          {
+            category: "ETRX",
+            first: 100,
+            second: 100,
+            third: 88.23,
+            forth: 30,
+          },
+        ];
 
-var chart = am4core.create('chartdiv', am4charts.XYChart)
-chart.colors.step = 2;
+        createSeries("first", "2017-18");
+        createSeries("second", "2018-19");
+        createSeries("third", "2019-20");
+        createSeries("forth", "2020-21");
 
-chart.legend = new am4charts.Legend()
-chart.legend.position = 'top'
-chart.legend.paddingBottom = 20
-chart.legend.labels.template.maxWidth = 95
+        function arrangeColumns() {
+          var series = chart.series.getIndex(0);
 
-var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-xAxis.dataFields.category = 'category'
-xAxis.renderer.cellStartLocation = 0.1
-xAxis.renderer.cellEndLocation = 0.9
-xAxis.renderer.grid.template.location = 0;
-let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-  valueAxis.title.text = "Student Placed (%)";
-  valueAxis.title.fontWeight = "bold";
-    valueAxis.min = 0;
-    valueAxis.max = 100;
+          var w =
+            1 -
+            xAxis.renderer.cellStartLocation -
+            (1 - xAxis.renderer.cellEndLocation);
+          if (series.dataItems.length > 1) {
+            var x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
+            var x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
+            var delta = ((x1 - x0) / chart.series.length) * w;
+            if (am4core.isNumber(delta)) {
+              var middle = chart.series.length / 2;
 
-function createSeries(value, name) {
-    var series = chart.series.push(new am4charts.ColumnSeries())
-    series.dataFields.valueY = value
-    series.dataFields.categoryX = 'category'
-    series.name = name
-
-    series.events.on("hidden", arrangeColumns);
-    series.events.on("shown", arrangeColumns);
-
-    var bullet = series.bullets.push(new am4charts.LabelBullet())
-    bullet.interactionsEnabled = false
-    bullet.dy = 20;
-
-
-   // bullet.label.text = '{valueY}'
-//    bullet.label.fill = am4core.color('#ffffff')
-
-    return series;
-}
-
-chart.data = [
-    {
-        category: 'COMPS',
-        first: 100,
-        second: 70.31,
-        third: 69.23,
-        forth:80
-    },
-    {
-        category: 'IT',
-        first: 81.48,
-        second: 86.44,
-        third: 92.72,
-        forth:91.25
-    },
-    {
-        category: 'EXTC',
-        first: 77.89,
-        second: 68.6,
-        third: 43,
-        forth: 40
-    },
-    {
-        category: 'ETRX',
-        first: 100,
-        second: 100,
-        third: 88.23,
-        forth: 30
-    }
-]
-
-
-createSeries('first', '2017-18');
-createSeries('second', '2018-19');
-createSeries('third', '2019-20');
-createSeries('forth','2020-21');
-
-
-function arrangeColumns() {
-
-    var series = chart.series.getIndex(0);
-
-    var w = 1 - xAxis.renderer.cellStartLocation - (1 - xAxis.renderer.cellEndLocation);
-    if (series.dataItems.length > 1) {
-        var x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
-        var x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
-        var delta = ((x1 - x0) / chart.series.length) * w;
-        if (am4core.isNumber(delta)) {
-            var middle = chart.series.length / 2;
-
-            var newIndex = 0;
-            chart.series.each(function(series) {
+              var newIndex = 0;
+              chart.series.each(function (series) {
                 if (!series.isHidden && !series.isHiding) {
-                    series.dummyData = newIndex;
-                    newIndex++;
+                  series.dummyData = newIndex;
+                  newIndex++;
+                } else {
+                  series.dummyData = chart.series.indexOf(series);
                 }
-                else {
-                    series.dummyData = chart.series.indexOf(series);
-                }
-            })
-            var visibleCount = newIndex;
-            var newMiddle = visibleCount / 2;
+              });
+              var visibleCount = newIndex;
+              var newMiddle = visibleCount / 2;
 
-            chart.series.each(function(series) {
+              chart.series.each(function (series) {
                 var trueIndex = chart.series.indexOf(series);
                 var newIndex = series.dummyData;
 
-                var dx = (newIndex - trueIndex + middle - newMiddle) * delta
+                var dx = (newIndex - trueIndex + middle - newMiddle) * delta;
 
-                series.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
-                series.bulletsContainer.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
-
-            })
-
-
+                series.animate(
+                  { property: "dx", to: dx },
+                  series.interpolationDuration,
+                  series.interpolationEasing
+                );
+                series.bulletsContainer.animate(
+                  { property: "dx", to: dx },
+                  series.interpolationDuration,
+                  series.interpolationEasing
+                );
+              });
+            }
+          }
         }
-    }
-}
+      }); // end am4core.ready()
+    </script>
 
-}); // end am4core.ready()
-</script>
+    <script>
+      am4core.ready(function () {
+        // Themes begin
+        //am4core.useTheme(am4themes_material);
+        am4core.useTheme(am4themes_moonrisekingdom);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
 
-<script>
-am4core.ready(function() {
+        // Create chart instance
+        var chart = am4core.create("chartdivs", am4charts.XYChart3D);
+        var its = document.getElementById("it").value;
+        var extcs = document.getElementById("extc").value;
+        var etrxs = document.getElementById("etrx").value;
+        var compss = document.getElementById("comps").value;
 
-// Themes begin
-//am4core.useTheme(am4themes_material);
-am4core.useTheme(am4themes_moonrisekingdom);
-am4core.useTheme(am4themes_animated);
-// Themes end
+        // Add data
 
-// Create chart instance
-var chart = am4core.create("chartdivs", am4charts.XYChart3D);
-var its = document.getElementById("it").value;
-var extcs = document.getElementById("extc").value;
-var etrxs = document.getElementById("etrx").value;
-var compss = document.getElementById("comps").value;
-
-// Add data
-
- chart.data = [
+        chart.data = [
           {
             department: "IT",
             placed: 63,
@@ -308,65 +292,63 @@ var compss = document.getElementById("comps").value;
             department: "ETRX",
             placed: 14,
           },
-];
+        ];
 
-// chart.data = [{
-//   "department": "IT",
-//   "placed": its
-// }, {
-//   "department": "EXTC",
-//   "placed": extcs
-// }, {
-//   "department": "COMPS",
-//   "placed": compss
-// }, {
-//   "department": "ETRX",
-//   "placed": etrxs
-// }];
-// Create axes
-let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-categoryAxis.dataFields.category = "department";
-categoryAxis.renderer.labels.template.rotation = 270;
-categoryAxis.renderer.labels.template.hideOversized = false;
-categoryAxis.renderer.minGridDistance = 20;
-categoryAxis.renderer.labels.template.horizontalCenter = "right";
-categoryAxis.renderer.labels.template.verticalCenter = "middle";
-categoryAxis.tooltip.label.rotation = 270;
-categoryAxis.tooltip.label.horizontalCenter = "right";
-categoryAxis.tooltip.label.verticalCenter = "middle";
+        // chart.data = [{
+        //   "department": "IT",
+        //   "placed": its
+        // }, {
+        //   "department": "EXTC",
+        //   "placed": extcs
+        // }, {
+        //   "department": "COMPS",
+        //   "placed": compss
+        // }, {
+        //   "department": "ETRX",
+        //   "placed": etrxs
+        // }];
+        // Create axes
+        let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "department";
+        categoryAxis.renderer.labels.template.rotation = 270;
+        categoryAxis.renderer.labels.template.hideOversized = false;
+        categoryAxis.renderer.minGridDistance = 20;
+        categoryAxis.renderer.labels.template.horizontalCenter = "right";
+        categoryAxis.renderer.labels.template.verticalCenter = "middle";
+        categoryAxis.tooltip.label.rotation = 270;
+        categoryAxis.tooltip.label.horizontalCenter = "right";
+        categoryAxis.tooltip.label.verticalCenter = "middle";
 
-let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-valueAxis.title.text = "Students Placed (%)";
-valueAxis.title.fontWeight = "bold";
-valueAxis.min = 0;
+        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.title.text = "Students Placed (%)";
+        valueAxis.title.fontWeight = "bold";
+        valueAxis.min = 0;
 
-// Create series
-var series = chart.series.push(new am4charts.ColumnSeries3D());
-series.dataFields.valueY = "placed";
-series.dataFields.categoryX = "department";
-series.name = "Placed";
-series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
-series.columns.template.fillOpacity = .8;
+        // Create series
+        var series = chart.series.push(new am4charts.ColumnSeries3D());
+        series.dataFields.valueY = "placed";
+        series.dataFields.categoryX = "department";
+        series.name = "Placed";
+        series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+        series.columns.template.fillOpacity = 0.8;
 
-var columnTemplate = series.columns.template;
-columnTemplate.strokeWidth = 2;
-columnTemplate.strokeOpacity = 1;
-columnTemplate.stroke = am4core.color("#FFFFFF");
+        var columnTemplate = series.columns.template;
+        columnTemplate.strokeWidth = 2;
+        columnTemplate.strokeOpacity = 1;
+        columnTemplate.stroke = am4core.color("#FFFFFF");
 
-columnTemplate.adapter.add("fill", function(fill, target) {
-  return chart.colors.getIndex(target.dataItem.index);
-})
+        columnTemplate.adapter.add("fill", function (fill, target) {
+          return chart.colors.getIndex(target.dataItem.index);
+        });
 
-columnTemplate.adapter.add("stroke", function(stroke, target) {
-  return chart.colors.getIndex(target.dataItem.index);
-})
+        columnTemplate.adapter.add("stroke", function (stroke, target) {
+          return chart.colors.getIndex(target.dataItem.index);
+        });
 
-chart.cursor = new am4charts.XYCursor();
-chart.cursor.lineX.strokeOpacity = 0;
-chart.cursor.lineY.strokeOpacity = 0;
-
-}); // end am4core.ready()
-</script>
-
-</body>
+        chart.cursor = new am4charts.XYCursor();
+        chart.cursor.lineX.strokeOpacity = 0;
+        chart.cursor.lineY.strokeOpacity = 0;
+      }); // end am4core.ready()
+    </script>
+  </body>
 </html>

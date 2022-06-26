@@ -68,17 +68,32 @@ img{
                 CTC</th>
                 <th rowspan="2" style="text-decoration: none;">
                     Eligibility</th>
+                {% if admin_type == "Super" %}
                 <th colspan="4" style="text-decoration: none;">
                 Placed</th>
+                {%else%}
+                <th  style="text-decoration: none;">
+                Placed</th>
+                {%endif%}
                 <th rowspan="2" style="text-decoration: none;">
                     Total</th>
 
             </tr>
             <tr>
+                {% if admin_type == "Super" %}
                 <th>IT</th>
                 <th>Comps</th>
                 <th>EXTC</th>
                 <th>ETRX</th>
+                {%elif admin_type == "Information Technology" %}
+                <th>IT</th>
+                {%elif admin_type == "Computer" %}
+                <th>Comps</th>
+                {%elif admin_type == "Electronics & Telecommunication" %}
+                <th>EXTC</th>
+                {%elif admin_type == "Electronics" %}
+                <th>ETRX</th>
+                {%endif%}
             </tr>
         </thead>
         {% for details in details %}
@@ -87,10 +102,20 @@ img{
             <td>{{details.comp_name}}</td>
             <td>{{details.ctc}}</td>
             <td>{{details.eligibility}} %</td>
+            {% if admin_type == "Super" %}
             <td class="student">{{it}}</td>
             <td class="student">{{comps}}</td>
             <td class="student">{{extc}}</td>
             <td class="student">{{etrx}}</td>
+            {%elif admin_type == "Information Technology" %}
+            <td class="student">{{student_placed}}</td>
+            {%elif admin_type == "Computer" %}
+            <td class="student">{{student_placed}}</td>
+            {%elif admin_type == "Electronics & Telecommunication" %}
+            <td class="student">{{student_placed}}</td>
+            {%elif admin_type == "Electronics" %}
+            <td class="student">{{student_placed}}</td>
+            {%endif%}
             <td id="total"></td>
         </tr>
         {% endfor %}

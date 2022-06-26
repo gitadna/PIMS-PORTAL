@@ -35,10 +35,7 @@
         <div class="row heading">
           <h3>On Campus Companies</h3>
         </div>
-        {% if admin_specific %}
-        <p> Only This compnay come for your particular branch </p>
-        {%endif%}
-        {% if comps.count > 0 %}
+        {% if comps|length > 0 %}
 
         <div class="companies" style="width: 80%; margin-left: 50px">
           {% for comp in comps %}
@@ -120,7 +117,7 @@
                 {% for eligible in eligibles %} 
                 {% ifequal eligible.comp_name comp.comp_name %}
                 <tr>
-                  {% if eligible.stud_user|length > 1 %}
+                  {% if eligible.stud_user|length > 0 %}
                   <td>{{ eligible.stud_user }}</td>
                   <td>{{ eligible.stud_name }}</td>
                   <td>{{ eligible.branch }}</td>
