@@ -27,14 +27,8 @@
     <option value="Gender">Gender</option>
     {% if request.session.admin_type == "Super" %}
     <option value="Branch">Branch</option>
-    {%elif request.session.admin_type == "Information Technology"%}
-    <option value="Branch">IT Students</option>
-    {%elif request.session.admin_type == "Computer"%}
-    <option value="Branch">IT Students</option>
-    {%elif request.session.admin_type == "Electronics & Telecommunication"%}
-    <option value="Branch">IT Students</option>
-    {%elif request.session.admin_type == "Electronics"%}
-    <option value="Branch">IT Students</option>
+    {%else%}
+    <option value="Branch">{{request.session.admin_type}}</option>
     {%endif%}
     <option value="Percentage_low">Percentage : Low to High </option>
     <option value="Percentage_high">Percentage : Hight to Low </option>
@@ -127,7 +121,7 @@
                     <td>{{ student.name }}</td>
                     <td>{{ student.user }}</td>
                     <td>{{ student.branch }}</td>
-                    <td>{{ student.sperc }}</td>
+                    <td>{{ student.agg }}</td>
                 </tr>
 
                 {% endfor %}

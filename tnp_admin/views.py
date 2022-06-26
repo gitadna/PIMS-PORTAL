@@ -844,99 +844,29 @@ def sorting_student(request):
             else:
                 return render(request,"sorting_student.html")
 
-        elif (admin_type == "Information Technology"):
-            if request.method == "POST":
-                student_filter = request.POST['student_filter']
-
-                if student_filter == "Gender":
-                    student_details=Resume.objects.filter(branch=admin_type).order_by('gender')
-                    return render(request,"sorting_student.html",{"student_details":student_details,'student_filter':student_filter})
-
-                elif student_filter == "Branch":
-
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_low":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_high":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('-agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-            else:
-                return render(request,"sorting_student.html")
-
-        elif (admin_type == "Computer"):
-            if request.method == "POST":
-                student_filter = request.POST['student_filter']
-
-                if student_filter == "Gender":
-                    student_details=Resume.objects.filter(branch=admin_type).order_by('gender')
-                    return render(request,"sorting_student.html",{"student_details":student_details,'student_filter':student_filter})
-
-                elif student_filter == "Branch":
-
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_low":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_high":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('-agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-            else:
-                return render(request,"sorting_student.html")
-
-        elif (admin_type == "Electronics & Telecommunication"):
-            if request.method == "POST":
-                student_filter = request.POST['student_filter']
-
-                if student_filter == "Gender":
-                    student_details=Resume.objects.filter(branch=admin_type).order_by('gender')
-                    return render(request,"sorting_student.html",{"student_details":student_details,'student_filter':student_filter})
-
-                elif student_filter == "Branch":
-
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_low":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_high":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('-agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-            else:
-                return render(request,"sorting_student.html")
-
-        elif (admin_type == "Electronics"):
-            if request.method == "POST":
-                student_filter = request.POST['student_filter']
-
-                if student_filter == "Gender":
-                    student_details=Resume.objects.filter(branch=admin_type).order_by('gender')
-                    return render(request,"sorting_student.html",{"student_details":student_details,'student_filter':student_filter})
-
-                elif student_filter == "Branch":
-
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_low":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-
-                elif student_filter == "Percentage_high":
-                    student_details = Resume.objects.filter(branch=admin_type).order_by('-agg')
-                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
-            else:
-                return render(request,"sorting_student.html")
         else:
-            return render(request,"display_student.html")
+            if request.method == "POST":
+                student_filter = request.POST['student_filter']
+
+                if student_filter == "Gender":
+                    student_details=Resume.objects.filter(branch=admin_type).order_by('gender')
+                    return render(request,"sorting_student.html",{"student_details":student_details,'student_filter':student_filter})
+
+                elif student_filter == "Branch":
+
+                    student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
+
+                elif student_filter == "Percentage_low":
+                    student_details = Resume.objects.filter(branch=admin_type).order_by('agg')
+                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
+
+                elif student_filter == "Percentage_high":
+                    student_details = Resume.objects.filter(branch=admin_type).order_by('-agg')
+                    return render(request,"sorting_student.html",{'student_details':student_details,'student_filter':student_filter})
+            else:
+                return render(request,"sorting_student.html")
+        return render(request,"display_student.html")
 
 
 
