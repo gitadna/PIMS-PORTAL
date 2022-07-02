@@ -272,6 +272,9 @@ font-size:15.5;
 list-style:none;
 border-bottom:1px solid rgba(107,121,124,0.1);
 }
+.box1{
+    cursor: pointer;
+}
 .information li span{
 display: inline-block;
 font-weight:bold;
@@ -1145,7 +1148,6 @@ padding:60px 0 0 0;
 background:rgba(10,10,10,0.2);
 padding:12px 0;
 text-align:center;
-margin-top:50px;
 }
 .copy-right a{
 color:#da0833;	
@@ -1268,6 +1270,7 @@ margin-bottom:2px;
     line-height: 1.9;
 }
 footer .size{
+    margin-top: 6em;
     margin-left: 0;
 }
 }
