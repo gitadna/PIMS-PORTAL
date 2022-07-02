@@ -30,7 +30,7 @@
 			.top-content{
 				color: black;
 				margin-top: -4%;
-				font-size: 20px;
+				font-size: 2rem;
 				line-height: 21pt;
 			}
 			.content{
@@ -39,18 +39,22 @@
 			    font-size:50px;
 			    text-align:center;
 			}
+			@media only screen and (max-width: 1115px){
+				.top-content{
+					font-size: 1.5rem;
+				}
+			}
 			@media only screen and (max-width: 982px){
 				.top-content{
-					font-size: 25px;
 					margin-top: 2%;
-				}
+				}				
 				.top-logo{
-					max-width: 20%;
-    				margin-left: 24%;
+					max-width: 14%;
+    				margin-left: 31%;
 				}
 				.right{
-					margin-left: 61%;
-    				margin-top: -24%;
+					margin-left: 11%;
+    				margin-top: 2%;
 				}
 				.content{
 				    text-align:center;
@@ -82,11 +86,11 @@
 			    <img src="{% static 'img/somaiya_logo.png' %}" class="top-logo" alt="kjsieit logo">
 				<img src="{% static 'img/logo2.jpg' %}" class="top-logo right" alt="">
 				<div class="top-content">
-				<h1 class="font-weight-bold text-center top-content">K. J. Somaiya Institute of Engineering and Information Technology,  Sion,  Mumbai</h1></div>
-				<p class="text-center" style="color: black;">An Autonomous Institute Permanently Affiliated to the University of Mumbai<br></p>
+				<h1 class="font-weight-bold box1  text-center top-content">K. J. Somaiya Institute of Engineering and Information Technology,  Sion,  Mumbai</h1></div>
+				<p class="text-center box1 " style="color: black;">An Autonomous Institute Permanently Affiliated to the University of Mumbai<br></p>
 
 
-				<h1 class="font-weight-bold content">Placement Information Management System<br>(PIMS)</h1>
+				<h1 class="font-weight-bold content box1">Placement Information Management System<br>(PIMS)</h1>
 
 			</div>
 
@@ -95,7 +99,7 @@
 		<section class="features">
 			<div class="container">
 				<div class="col-md-4 col-sm-4">
-					<div class="features-content">
+					<div class="features-content box1">
 						<span class="box1"><span aria-hidden="true" class="icon-briefcase"></span></span>
 						<h3>Placements</h3>
 						<p>TPO sessions are planned in the time table for SE,TE & BE students and grooming sessions are conducted every week to prepare the students for placements.</p>
@@ -103,7 +107,7 @@
 				</div>
 
 				<div class="col-md-4 col-sm-4">
-					<div class="features-content">
+					<div class="features-content box1">
 						<span class="box1"><span aria-hidden="true" class="icon-search"></span></span>
 						<h3>Resume</h3>
 						<p>Resume guidance responsibility  is shared by all HODs, placement committee and various professional bodies. The proctors play a major role in individual counselling of students. </p>
@@ -111,7 +115,7 @@
 				</div>
 
 				<div class="col-md-4 col-sm-4">
-					<div class="features-content">
+					<div class="features-content box1">
 						<span class="box1"><span aria-hidden="true" class="icon-profile-male"></span></span>
 						<h3>Students Placed</h3>
 						<p>Seminars/ workshops are arranged at departmental level. The alumni also visit and interact with present students to mentor them on individual basis.</p>
@@ -126,7 +130,7 @@
 				<div class="col-md-3 col-sm-3 " style="background-color:#911717;">
 					<div class="counter-text" style="background-color:#911717;">
 						<span class="box1">
-						<span aria-hidden="true" class="icon-profile-male"></span></span>
+						<span aria-hidden="true" class="icon-profile-male box1"></span></span>
 						<a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Signup for interested students</p></a>
 					</div>
@@ -134,7 +138,7 @@
 
 				<div class="col-md-3 col-sm-3" style="background-color:#911717;" >
 					<div class="counter-text" style="background-color:#911717;">
-						<span class="box1"><span aria-hidden="true" class="	fa fa-comments-o"></span></span>
+						<span class="box1"><span aria-hidden="true" class="	fa fa-comments-o box1"></span></span>
 					    <a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Pre Placement Talk</p></a>
 					</div>
@@ -142,7 +146,7 @@
 
 				<div class="col-md-3 col-sm-3" style="background-color:#911717;">
 					<div class="counter-text" style="background-color:#911717;">
-						<span class="box1"><span aria-hidden="true" class="icon-search"></span></span>
+						<span class="box1"><span aria-hidden="true" class="icon-search box1"></span></span>
 						<a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Selection Process</p></a>
 					</div>
@@ -150,7 +154,7 @@
 
 				<div class="col-md-3 col-sm-3" style="background-color:#911717;">
 					<div class="counter-text" style="background-color:#911717;">
-					<span class="box1"><span aria-hidden="true" class="	fa fa-envelope-o"></span></span>
+					<span class="box1"><span aria-hidden="true" class="	fa fa-envelope-o box1"></span></span>
 					<a href="{% static 'img/placement++process.pdf'%}" target="_blank" style="color:white;">
 						<p>Result Declaration & Email Communication</p></a>
 					</div>
@@ -172,7 +176,7 @@
 								</div>
 							</div>
 							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
+								<div class="company-content box1">
 									<h3>Junior Developer</h3>
 									<p><span class="company-name"><i class="fa fa-briefcase"></i>Mu Sigma</span><span class="company-location"><i class="fa fa-map-marker"></i>Pune, Maharashtra</span><span class="package"><i class="fa fa-money"></i>₹7,00,000</span></p>
 								</div>
@@ -188,7 +192,7 @@
 								</div>
 							</div>
 							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
+								<div class="company-content box1">
 									<h3>Back-End developer</h3>
 									<p><span class="company-name"><i class="fa fa-briefcase"></i>AWS</span><span class="company-location"><i class="fa fa-map-marker"></i>Mumbai, Maharashtra</span><span class="package"><i class="fa fa-money"></i>₹5,00,000</span></p>
 								</div>
@@ -199,12 +203,12 @@
 					<div class="company-list">
 						<div class="row">
 							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
+								<div class="company-logo box1">
 									<img src="{% static 'img/accenture.png' %}" style="margin-top: 20px;" class="img-responsive" alt="" />
 								</div>
 							</div>
 							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
+								<div class="company-content box1">
 									<h3>UI/UX Designer</h3>
 									<p><span class="company-name"><i class="fa fa-briefcase"></i>Accenture</span><span class="company-location"><i class="fa fa-map-marker"></i>Airoli, Thane, Maharashtra</span><span class="package"><i class="fa fa-money"></i>₹4,50,000</span></p>
 								</div>
@@ -215,12 +219,12 @@
 					<div class="company-list">
 						<div class="row">
 							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
+								<div class="company-logo box1">
 									<img src="{% static 'img/mediadotnet.jpg' %}" style="margin-top: 20px;" class="img-responsive" alt="" />
 								</div>
 							</div>
 							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
+								<div class="company-content box1">
 									<h3>Publicity</h3>
 									<p><span class="company-name"><i class="fa fa-briefcase"></i>Media.net</span><span class="company-location"><i class="fa fa-map-marker"></i>Andheri, Mumbai, Maharashtra</span><span class="package"><i class="fa fa-money"></i>₹3,50,000</span></p>
 								</div>
@@ -231,12 +235,12 @@
 					<div class="company-list">
 						<div class="row">
 							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
+								<div class="company-logo box1">
 									<img src="{% static 'img/pinclick.png' %}" style="margin-top: 20px;" class="img-responsive" alt="">
 								</div>
 							</div>
 							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
+								<div class="company-content box1">
 									<h3>Marketing Holder</h3>
 									<p><span class="company-name"><i class="fa fa-briefcase"></i>Pin Click</span><span class="company-location"><i class="fa fa-map-marker"></i>Thane, Maharashtra</span><span class="package"><i class="fa fa-money"></i>₹3,50,000</span></p>
 								</div>
