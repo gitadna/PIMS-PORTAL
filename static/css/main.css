@@ -56,12 +56,13 @@ nav.navbar.bootsnav ul.nav > li > a {
     line-height: 3.5pt;
     font-family: 'Montserrat', sans-serif;
     background-color: transparent !important;
+    cursor: pointer;
 }
 nav.navbar.bootsnav ul.nav > li > a:hover{
-color:gray;
+background-color:rgba(0,0,0,.5);
 }
 nav.navbar.bootsnav ul.nav > li.active> a{
-color:gray;
+color:rgba(0,0,0,.5);
 }
 @media (min-width: 1024px){
 nav.navbar li.dropdown ul.dropdown-menu {

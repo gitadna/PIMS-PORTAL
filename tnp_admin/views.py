@@ -383,6 +383,8 @@ def add_company(request):
                 date = request.POST['date']
                 time = request.POST['time']
                 venue = request.POST['venue']
+                any_live_kt = request.POST['live_kt']
+                print('live',any_live_kt)
                 branch = request.POST.getlist('branch')
                 instruction = request.POST['instruction']
                 campus = request.POST['campus']
@@ -391,27 +393,27 @@ def add_company(request):
 
                 branch = ','.join(map(str, branch))
 
-                addCompany = Company(comp_name=c_name, comp_profile=c_profile, ctc=ctc, eligibility=eligible, bond=bond,
-                                         date=date, time=time, venue=venue, branch=branch, instruction=instruction, campus=campus)
-                addCompany.save()
+                # addCompany = Company(comp_name=c_name, comp_profile=c_profile, ctc=ctc, eligibility=eligible, bond=bond,
+                #                          date=date, time=time, venue=venue, branch=branch, instruction=instruction, campus=campus)
+                # addCompany.save()
 
                 temp = []
                 # and student.oneto6 == ""
-                if studentObj.count() > 0 :
-                    for student in studentObj:
-                        if int(ctc) <= 600000 and student.oneto6 == "":
-                            temp.append(student.somaiya_id)
-                        elif int(ctc) > 600000:
-                            temp.append(student.somaiya_id)
-                        else:
-                            pass
-                    return render(request, 'check_eligible.html',
-                                  {'temp': temp, 'c_name': c_name, 'studentObj': studentObj})
-                else:
-                    msg = {
-                        'success': "No student eligible."
-                    }
-                    return render(request, 'add_company.html', msg)
+                # if studentObj.count() > 0 :
+                #     for student in studentObj:
+                #         if int(ctc) <= 600000 and student.oneto6 == "":
+                #             temp.append(student.somaiya_id)
+                #         elif int(ctc) > 600000:
+                #             temp.append(student.somaiya_id)
+                #         else:
+                #             pass
+                    # return render(request, 'check_eligible.html',
+                    #               {'temp': temp, 'c_name': c_name, 'studentObj': studentObj})
+                # else:
+                #     msg = {
+                #         'success': "No student eligible."
+                #     }
+                return render(request, 'add_company.html')
             else:
                 msg = {
                     'success': "Company already exists."
@@ -693,7 +695,7 @@ def filled_student(request):
             writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
             for filled_student in filled_student_details:
                 writer.writerow([filled_student.name,
-                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+                filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
         
         elif(admin_type =="Information Technology" ):
             filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
@@ -706,7 +708,7 @@ def filled_student(request):
             writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
             for filled_student in filled_student_details:
                 writer.writerow([filled_student.name,
-                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+                filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
         
         elif(admin_type=="Computer"):
             filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
@@ -719,7 +721,7 @@ def filled_student(request):
             writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
             for filled_student in filled_student_details:
                 writer.writerow([filled_student.name,
-                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+                filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
         
         elif(admin_type =="Electronics & Telecommunication" ):
             filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
@@ -732,7 +734,7 @@ def filled_student(request):
             writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
             for filled_student in filled_student_details:
                 writer.writerow([filled_student.name,
-                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number])
+                filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
         
         elif(admin_type =="Electronics" ):
             filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
@@ -745,9 +747,49 @@ def filled_student(request):
             writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
             for filled_student in filled_student_details:
                 writer.writerow([filled_student.name,
-                filled_student.user,filled_student.branch,filled_student.gender,filled_student.number]) 
+                filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number]) 
         return response
-    
+
+
+
+
+@never_cache
+def updating_student(request):
+    if not request.session.get('admin_login'):
+        return HttpResponseRedirect("/login/")
+    else:
+        admin_type=request.session.get('admin_type')
+        if request.method == 'POST':           
+            user_id = request.POST['user_somaiya_id']            
+            if('sem 1' in request.POST):
+                updating_sem = request.POST['sem 1']
+                updating_mark = request.POST['sem 1_marks']
+                print('update',updating_sem,updating_mark)
+            if('sem 2' in request.POST):
+                updating_sem = request.POST['sem 2']
+                updating_mark = request.POST['sem 2_marks']
+                print('update',updating_sem,updating_mark)
+            if('sem 3' in request.POST):
+                updating_sem = request.POST['sem 3']
+                updating_mark = request.POST['sem 3_marks']
+                print('update',updating_sem,updating_mark)
+            if('sem 4' in request.POST):
+                updating_sem = request.POST['sem 4']
+                updating_mark = request.POST['sem 4_marks']
+                print('update',updating_sem,updating_mark)
+            if('sem 5' in request.POST):
+                updating_sem = request.POST['sem 5']
+                updating_mark = request.POST['sem 5_marks']
+                print('update',updating_sem,updating_mark)
+            if('sem 6' in request.POST):
+                updating_sem = request.POST['sem 6']
+                updating_mark = request.POST['sem 6_marks']
+                print('update',updating_sem,updating_mark)
+            else:
+                print('nothing check')
+                return render(request,'update_student.html')
+    return render(request,'update_student.html')
+        # if(admin_type =="Super"):
 
 
 @never_cache
@@ -886,35 +928,35 @@ def delete_resume(request):
         types = request.session.get('admin_type')
         if (types=="Super"):
             user = request.GET.get('s')
-            resume = Resume.objects.filter(user=user)
+            resume = Resume.objects.filter(somaiya_id=user)
             resume.delete()
             eligible = StudentsEligible.objects.filter(stud_user=user)
             eligible.delete()
             return HttpResponseRedirect("/tnp_admin/user_display")
         elif(types=="Information Technology"):
             user = request.GET.get('s')
-            resume = Resume.objects.filter(user=user,branch=types)
+            resume = Resume.objects.filter(somaiya_id=user,branch=types)
             resume.delete()
             eligible = StudentsEligible.objects.filter(stud_user=user)
             eligible.delete()
             return HttpResponseRedirect("/tnp_admin/user_display")
         elif(types=="Computer"):
             user = request.GET.get('s')
-            resume = Resume.objects.filter(user=user,branch=types)
+            resume = Resume.objects.filter(somaiya_id=user,branch=types)
             resume.delete()
             eligible = StudentsEligible.objects.filter(stud_user=user)
             eligible.delete()
             return HttpResponseRedirect("/tnp_admin/user_display")
         elif(types=="Electronics & Telecommunication"):
             user = request.GET.get('s')
-            resume = Resume.objects.filter(user=user,branch=types)
+            resume = Resume.objects.filter(somaiya_id=user,branch=types)
             resume.delete()
             eligible = StudentsEligible.objects.filter(stud_user=user)
             eligible.delete()
             return HttpResponseRedirect("/tnp_admin/user_display")
         elif(types=="Electronics"):
             user = request.GET.get('s')
-            resume = Resume.objects.filter(user=user,branch=types)
+            resume = Resume.objects.filter(somaiya_id=user,branch=types)
             resume.delete()
             eligible = StudentsEligible.objects.filter(stud_user=user)
             eligible.delete()
@@ -1032,36 +1074,29 @@ def add_excel(request):
         student = request.FILES['excel_student']
         check = student.name
         if check.endswith('.xls') or check.endswith('.xlsx') or check.endswith('.XLS') or check.endswith('.XLSX'):
-            wb = openpyxl.load_workbook(student)
-            worksheet = wb["Sheet1"]
-            excel_data = list()
-            msg = []
-            no = 0
-            yes = 0
-            for i,row in enumerate(worksheet.iter_rows()):
-                row_data = list()
-                if i == 0:
-                    continue
-                for cell in row:
-                    row_data.append(str(cell.value))
-                excel_data.append(row_data)
-
-            for add in excel_data:
-                name = add[0]
-                username = add[1]
-                branch = add[2]
-
-                if User.objects.filter(username=username).exists() or name == "" or username == "" or branch == "" or (not username.endswith('@somaiya.edu')):
+            # wb = openpyxl.load_workbook(student)
+            adding_student = pd.read_excel(student)
+            
+            msg = {}
+            yes,no=0,0
+            for student in adding_student.itertuples():
+                student_username = student.somaiya_email_id
+                stud_name = student.Name
+                branch = student.Branch
+                # print('studne',pd.isna(student_username)) 
+                if User.objects.filter(username=student_username).exists() or pd.isna(stud_name) or pd.isna(student_username) or pd.isna(branch) or (not student_username.endswith('@somaiya.edu')):
+                    # print(student)
                     no = no + 1
                 else:
                     password = str(''.join(random.choices(string.ascii_uppercase + string.digits, k = 8)))
-                    addUser = User(name=name, username=username, password=password, branch=branch)
-                    addUser.save()
+                    # addUser = User(name=stud_name, username=student_username, password=password, branch=branch)
+                    # addUser.save()
+                    print('pass',password)
                     send_mail(
                         'Placement Portal',
-                        'Id: ' + username + '\nPassword: ' + password + '.',
-                        'tnpportal7@gmail.com',
-                        [username],
+                        'Id: ' + student_username + '\nPassword: ' + password + '.',
+                        'pimsportal@tnpportal.kjsieit.in',
+                        [student_username],
                         fail_silently=False,
                     )
                     yes = yes + 1
@@ -1069,13 +1104,81 @@ def add_excel(request):
                 "yes": yes,
                 "no": no,
                 }
+
+            # print('no',no)
+                
+            # worksheet = wb["Sheet1"]
+            # no = 0
+            # yes = 0
+            # for i,row in enumerate(worksheet.iter_rows()):
+            #     row_data = list()
+            #     if i == 0:
+            #         continue
+            #     for cell in row:
+            #         row_data.append(str(cell.value))
+            #     excel_data.append(row_data)
+
+            # for add in excel_data:
+            #     name = add[0]
+            #     username = add[1]
+            #     branch = add[2]
+
+            #     if User.objects.filter(username=username).exists() or name == "" or username == "" or branch == "" or (not username.endswith('@somaiya.edu')):
+            #         no = no + 1
+            #     else:
+            #         password = str(''.join(random.choices(string.ascii_uppercase + string.digits, k = 8)))
+            #         addUser = User(name=name, username=username, password=password, branch=branch)
+            #         addUser.save()
+            #         send_mail(
+            #             'Placement Portal',
+            #             'Id: ' + username + '\nPassword: ' + password + '.',
+            #             'tnpportal7@gmail.com',
+            #             [username],
+            #             fail_silently=False,
+            #         )
+            #         yes = yes + 1
+            # msg = {
+            #     "yes": yes,
+            #     "no": no,
+            #     }
         else:
             msg = {
                 "invalidate": "Invalid file format.",
                 }
         return render(request, 'add_student.html', msg)
 
+def add_student_from_excel(excel_data):
+    yes,no = 0,0
+    stud_user = excel_data.somaiya_email_ID
+    stud_name = excel_data.student_name
+    branch = excel_data.branch
+    if(stud_user.endswith('@somaiya.edu')):
+        password = str(''.join(random.choices(string.ascii_uppercase + string.digits, k = 8)))
+        addUser = User(name=stud_name, username=stud_user, password=password, branch=branch)
+        addUser.save()
+        # print('pass',password)
+        send_mail(
+            'Placement Portal',
+            'Id: ' + stud_user + '\nPassword: ' + password + '.',
+            'pimsportal@tnpportal.kjsieit.in',
+            [stud_user],
+            fail_silently=False,
+        )
+        yes += 1
+    else:
+        no +=1
+    return [yes,no]
 
+    # student_username.endswith('@somaiya.edu')
+    # print('student',excel_data)
+
+
+def calculate_percentage(cgpa_score):
+    if(cgpa_score<7):
+        final_percent =  7.1*cgpa_score + 12
+    else:
+        final_percent = 7.4*cgpa_score + 12
+    return ('%.3f'%final_percent)
 
 @never_cache
 def student_data(request):
@@ -1093,15 +1196,83 @@ def student_data(request):
                     student_data = pd.read_excel(student_entries_data)
                 else:
                     student_data = pd.read_csv(student_entries_data,encoding='utf-8')
-                for student in student_data.itertuples():
-                    # print('student in data',student.college_id_no)
-                    if(User.objects.filter(username=student.somaiya_email_ID).exists()):
-                        if(Resume.objects.filter(somaiya_id=student.somaiya_email_ID).exists()):
-                            no+=1
-                            msg += f"{student.somaiya_email_ID} Data Already exist \n"
-                        else:
+                try:
+                    for student in student_data.itertuples():
+                        # print('student in data',calculate_percentage(student.average_CGPA))
+                        if(User.objects.filter(username=student.somaiya_email_ID).exists()):
+                            if(Resume.objects.filter(somaiya_id=student.somaiya_email_ID).exists()):
+                                no+=1
+                                msg += f"{student.somaiya_email_ID} Data Already exist \n"
+                            else:
+                                try:
+                                    if(not(pd.isna(student.sem_1)) and not(pd.isna(student.sem_2))):
+                                        obj = Resume.objects.create(
+                                        prn_number=student.prn_no,
+                                        name=student.student_name,
+                                        college_id=student.college_id_no,
+                                        somaiya_id=student.somaiya_email_ID,
+                                        non_somiya_id= student.non_somaiya_email_ID,
+                                        branch=student.branch,
+                                        gender=student.gender,
+                                        diploma=None,
+                                        sem1=student.sem_1,
+                                        sem2=student.sem_2,
+                                        ssc_marks=student.marks_10,
+                                        hsc_marks=student.marks_12_or_diploma_marks,
+                                        sem3=student.sem_3,
+                                        sem4=student.sem_4,
+                                        sem5=student.sem_5,
+                                        sem6= student.sem_6,
+                                        mobile_no = student.contact_no,
+                                        alternate_phone_no = student.alternate_contact_no,
+                                        agg=calculate_percentage(student.average_CGPA),
+                                        nearest_railway_station= student.nearest_railway_station,
+                                        home_Town=student.home_Town,
+                                        average_CGPA=student.average_CGPA,
+                                        lock=True
+                                        )
+                                        # print(obj)
+                                        obj.save()
+                                    else:
+                                        obj = Resume.objects.create(
+                                        prn_number=student.prn_no,
+                                        college_id=student.college_id_no,
+                                        name=student.student_name,
+                                        somaiya_id=student.somaiya_email_ID,
+                                        non_somiya_id= student.non_somaiya_email_ID,
+                                        branch=student.branch,
+                                        gender=student.gender,
+                                        diploma=student.marks_12_or_diploma_marks,
+                                        sem1=None,
+                                        sem2=None,
+                                        ssc_marks=student.marks_10,
+                                        hsc_marks=None,
+                                        sem3=student.sem_3,
+                                        sem4=student.sem_4,
+                                        sem5=student.sem_5,
+                                        sem6= student.sem_6,
+                                        agg=calculate_percentage(student.average_CGPA),
+                                        mobile_no = student.contact_no,
+                                        alternate_phone_no = student.alternate_contact_no,
+                                        nearest_railway_station= student.nearest_railway_station,
+                                        home_Town=student.home_Town,
+                                        average_CGPA=student.average_CGPA,
+                                        lock=True
+                                        )
+                                        obj.save()
+                                        # print('student is from diploma',student)
+                                    # obj = Resume()
+                                    yes+=1
+                                except Exception as e:
+                                    no+=1
+                                    msg+="Please fill the information properly"
+                                    print('error',e)                            
+                                # print('studnet passed from 12',pd.isna(student.marks_12))
+                        else:                            
+                            add_student_from_excel(student)
+                            # if(student_from_excel[0]<0):
                             try:
-                                if(pd.isna(student.diploma_marks)):
+                                if(not(pd.isna(student.sem_1)) and not(pd.isna(student.sem_2))):
                                     obj = Resume.objects.create(
                                     prn_number=student.prn_no,
                                     name=student.student_name,
@@ -1119,7 +1290,9 @@ def student_data(request):
                                     sem4=student.sem_4,
                                     sem5=student.sem_5,
                                     sem6= student.sem_6,
-                                    agg=student.average_percentage,
+                                    mobile_no = student.contact_no,
+                                    alternate_phone_no = student.alternate_contact_no,
+                                    agg=calculate_percentage(student.average_CGPA),
                                     nearest_railway_station= student.nearest_railway_station,
                                     home_Town=student.home_Town,
                                     average_CGPA=student.average_CGPA,
@@ -1145,7 +1318,9 @@ def student_data(request):
                                     sem4=student.sem_4,
                                     sem5=student.sem_5,
                                     sem6= student.sem_6,
-                                    agg=student.average_percentage,
+                                    agg=calculate_percentage(student.average_CGPA),
+                                    mobile_no = student.contact_no,
+                                    alternate_phone_no = student.alternate_contact_no,
                                     nearest_railway_station= student.nearest_railway_station,
                                     home_Town=student.home_Town,
                                     average_CGPA=student.average_CGPA,
@@ -1158,11 +1333,12 @@ def student_data(request):
                             except Exception as e:
                                 no+=1
                                 msg+="Please fill the information properly"
-                                print('error',e)                            
-                            # print('studnet passed from 12',pd.isna(student.marks_12))
-                    else:
-                        no+=1
-                        msg += f"Student with email id {student.somaiya_email_ID} does not exist \n"
+                                print('error',e)
+                            # no+=1
+                            # msg += f"Student with email id {student.somaiya_email_ID} does not exist \n"
+                except AttributeError:
+                    error_occured = 'Something went wrong!'
+                    return render(request,'student_data.html',{'error':error_occured})
             else:
                 msg += 'File is not a proper format'
             return render(request, 'student_data.html',{'yes_count':yes,"no_count":no,"msg":msg})
@@ -1175,7 +1351,7 @@ def format_of_excel(request):
     else:
         columns = [
         "Sr.no","prn_no",'college_id_no','student_name','branch','gender',
-        'somaiya_email_ID','non_somaiya_email_ID','diploma_marks','marks_12','marks_10',
+        'somaiya_email_ID','non_somaiya_email_ID','marks_12_or_diploma_marks','marks_10',
         'sem_1','sem_2','sem_3','sem_4','sem_5',"sem_6",
         'average_percentage',"average_CGPA",'Contact no','Alternate contact no',
         'home_Town','nearest_railway_station'

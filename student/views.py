@@ -379,10 +379,11 @@ def resume(request):
                               {'resumes': pageObj, 'success': "Updated Successfully", 'name': passname, 'hn': hn})
         else:
             user_session = request.session['username']
-            pageObj = Resume.objects.filter(user=user_session)
+            pageObj = Resume.objects.filter(somaiya_id=user_session)
             if pageObj.exists():
+                # print('page',pageObj[0])
                 nedit = pageObj[0].name
-                name = nedit.split(" ", 1)
+                name = nedit.split(" ",1)
                 return render(request, 'resume_update.html', {'resumes': pageObj, 'name': name[1], 'hn': name[0]})
             else:
                 return render(request, 'resume_detail.html',{'start':"start"})

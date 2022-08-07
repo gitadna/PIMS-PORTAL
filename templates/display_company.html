@@ -68,23 +68,40 @@
                   <p>
                     <span class="company-name"
                       ><i class="fa fa-briefcase"></i>{{ comp.comp_profile }}</span
-                    ><span class="campus"
+                    >
+                    <span class="campus"
                       ><i class="fa fa-tag"></i>{{ comp.campus }}</span
-                    ><span class="company-location"
+                    >
+                    <span class="company-location"
                       ><i class="fa fa-map-marker"></i>{{ comp.venue }}</span
-                    ><span class="company-name"
+                    >
+                    <span class="company-name"
                       ><i class="fa fa-briefcase"></i>{{ comp.branch }}</span
-                    ><span class="package"
+                    >
+                    <span class="package"
                       ><i class="fa fa-money"></i>{{ comp.ctc }}</span
-                    ><span class="package"
+                    >
+                    <span class="package"
                       ><i class="glyphicon glyphicon-time"></i>{{ comp.time }}</span
-                    ><span class="package"
+                    >
+                    <span class="package"
                       ><i class="fa fa-calendar"></i>{{ comp.date }}</span
-                    ><span class="fa fa-book"
+                    >
+                    <span class="fa fa-book"
                       ><i class=""></i>{{ comp.bond }}</span
-                    ><span class="instruction"
+                    >
+                    <span class="instruction"
                       ><i class="fa fa-bars"></i>{{ comp.instruction }}</span
                     >
+                    <span>
+                      <button class="btn btn-link">
+                      <a
+                      href="/tnp_admin/eligible_pdf?c={{ comp.comp_name|urlencode }}"
+                      target="_blank"
+                      >Click here for Eligible student pdf</a
+                    >
+                  </button>
+                  </span>
                   </p>
                 </div>
               </div>
@@ -105,13 +122,14 @@
                   <th scope="col" style="color: #da0833">Username</th>
                   <th scope="col" style="color: #da0833">Name</th>
                   <th scope="col" style="color: #da0833">Branch</th>
-                  <th scope="col" style="color: #6e62f5">
-                    <a
+                  <th scope="col" style="color: #da0833">Select Placed Student</th>
+                  <!-- <th scope="col" style="color: #6e62f5">Download List of student</th> -->
+                    <!-- 6e62f5 -->
+                    <!-- <a
                       href="/tnp_admin/eligible_pdf?c={{ comp.comp_name|urlencode }}"
                       target="_blank"
                       >Download PDF</a
-                    >
-                  </th>
+                    > -->
                 </tr>
               </thead>
               <tbody>
@@ -126,10 +144,10 @@
                     <button class="btn btn-outline-primary" name="placed">
                       <a
                         href="/tnp_admin/student_placed?s={{ eligible.stud_user|urlencode }}&c={{ comp.comp_name|urlencode }}"
-                        >Selected Student</a
+                        >Select Student</a
                       >
                     </button>
-                  </td>
+                  </td>                  
                 </tr>
                 {%else%}
                 <p>no student {{ eligible.stud_user }}</p>

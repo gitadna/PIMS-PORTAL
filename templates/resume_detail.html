@@ -117,7 +117,7 @@ button:hover {
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-sticky bootsnav" style="background-color:#911717;">
+<nav class="navbar navbar-default navbar-sticky bootsnav">
 
       <div class="container">
         <!-- Start Header Navigation -->
@@ -146,7 +146,6 @@ button:hover {
 <form id="regForm" method="post" action="/student/resume/" enctype="multipart/form-data" class="border-class" accept-charset="UTF-8">
   {% csrf_token %}
   <h4>Resume</h4>
-  <!-- One "tab" for each step in the form: -->
 
     {% for error in error %}
     <p style="color:red;">{{ error }}</p>
@@ -207,7 +206,7 @@ button:hover {
 <p>
     <label class="checkbox-inline">
         {% if diploma_check == "yes" %}
-      <input type="checkbox" name="diploma" disabled class="diploma" checked onchange="dip(this)" style="height: 15px; width: 15px;"><b>Diploma</b>
+      <input type="" namcheckboxe="diploma" disabled class="diploma" checked onchange="dip(this)" style="height: 15px; width: 15px;"><b>Diploma</b>
         {% elif diploma_check == "no" %}
       <input type="checkbox" name="diploma" onchange="dip(this)" disabled style="height: 15px; width: 15px;"><b>Diploma</b>
         {% else %}
@@ -346,7 +345,7 @@ button:hover {
       <button type="button" id="nextBtn" onclick="nextPrev(1)" style="padding: 10px 20px; color:#fff">Next</button>
     </div>
   </div>
-  <!-- Circles which indicates the steps of the form: -->
+  
   <div style="text-align:center;margin-top:40px;">
     <span class="step"></span>
     <span class="step"></span>

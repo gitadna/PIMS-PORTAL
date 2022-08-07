@@ -51,10 +51,10 @@
               placeholder="CTC"
               name="ctc"
               required
-              pattern="\d*"
+              />
+              <!-- pattern="\d*"
               oninvalid="setCustomValidity('Enter valid format. Eg: 100000')"
-              onchange="try{setCustomValidity('')}catch(e){}"
-            />
+              onchange="try{setCustomValidity('')}catch(e){}" -->
             <input
               type="text"
               class="form-control input-lg"
@@ -65,13 +65,23 @@
               oninvalid="setCustomValidity('Enter valid format. Eg: 70')"
               onchange="try{setCustomValidity('')}catch(e){}"
             />
+            <select name="live_kt" class="form-control input-group-lg">
+              <option value="0" selected disabled>Select Live KT (if not leave at default 0) </option>
+              <!-- <option value="0">0</option> -->
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
             <select
               class="form-control input-lg"
               required
               name="branch"
               multiple
             >
-              <option value="" disabled>Branch</option>
+              <option value="" disabled>Select Branch</option>
               <option value="Computer">Computer</option>
               <option value="Information Technology">
                 Information Technology

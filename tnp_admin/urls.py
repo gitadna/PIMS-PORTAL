@@ -29,6 +29,7 @@ urlpatterns = [
                   path('student_details', views.filled_student, name="filled-student-details"),
                   path('student_data',views.student_data,name='student-data'),
                   path('format_of_excel',views.format_of_excel,name='student-excel-format'),
+                  path('update_student',views.updating_student,name='update-student')
                   
               ]
 

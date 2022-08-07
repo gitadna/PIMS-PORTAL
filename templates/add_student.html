@@ -107,27 +107,27 @@
     {% csrf_token %}
 <h3>Add Student (Excel)</h3>
 {% if request.session.admin_type == "Super" %}
-<p>Upload .xls or .xlsx format with <strong> Name, Username and Branch column.</strong></p>
+<p>Upload .xls or .xlsx format with <strong> Name, somaiya_email_id and Branch column.</strong></p>
 <input type="file" class="form-control input-lg" name="excel_student" accept=".xls,.xlsx" required>
 <input type="submit" class="btn btn-primary" value="Upload Excel">
 {% endif %}
 {% if request.session.admin_type == "Information Technology" %}
-<p>Upload .xls or .xlsx format with <strong>Name, Username and Branch column.(Only IT students.)</strong></p>
+<p>Upload .xls or .xlsx format with <strong>Name, somaiya_email_id and Branch column.(Only IT students.)</strong></p>
 <input type="file" class="form-control input-lg" name="excel_student" accept=".xls,.xlsx" required>
 <input type="submit" class="btn btn-primary" value="Upload Excel">
 {% endif %}
 {% if request.session.admin_type == "Computer" %}
-<p>Upload .xls or .xlsx format with <strong>Name, Username and Branch column.(Only Computer students.)</strong></p>
+<p>Upload .xls or .xlsx format with <strong>Name, somaiya_email_id and Branch column.(Only Computer students.)</strong></p>
 <input type="file" class="form-control input-lg" name="excel_student" accept=".xls,.xlsx" required>
 <input type="submit" class="btn btn-primary" value="Upload Excel">
 {% endif %}
 {% if request.session.admin_type == "Electronics & Telecommunication" %}
-<p>Upload .xls or .xlsx format with <strong>Name, Username and Branch column.(Only Electronics & Telecommunication students.)</strong></p>
+<p>Upload .xls or .xlsx format with <strong>Name, somaiya_email_id and Branch column.(Only Electronics & Telecommunication students.)</strong></p>
 <input type="file" class="form-control input-lg" name="excel_student" accept=".xls,.xlsx" required>
 <input type="submit" class="btn btn-primary" value="Upload Excel">
 {% endif %}
 {% if request.session.admin_type == "Electronics" %}
-<p>Upload .xls or .xlsx format with <strong>Name, Username and Branch column.(Only Electronics students.)</strong></p>
+<p>Upload .xls or .xlsx format with <strong>Name, somaiya_email_id and Branch column.(Only Electronics students.)</strong></p>
 <input type="file" class="form-control input-lg" name="excel_student" accept=".xls,.xlsx" required>
 <input type="submit" class="btn btn-primary" value="Upload Excel">
 {% endif %}

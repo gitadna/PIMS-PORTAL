@@ -29,7 +29,10 @@
     <div class="container">
         <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
             <form method="POST" action="/tnp_admin/student_data" enctype="multipart/form-data">
-                {% csrf_token %}                
+                {% csrf_token %}
+                {% if error %}                
+                <p>{{error}}</p>
+                {% endif %}        
                 {% if yes_count or no_count %}
                     {% if yes_count > 0 %}
                         <p>All Students added Succesfully</p>
@@ -46,7 +49,7 @@
     </div>
 </section>
     <!-- section End -->
-    
+    {% include "footer.html" %}
             <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
 

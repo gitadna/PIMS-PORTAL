@@ -113,6 +113,23 @@ button:hover {
   border-color:#242c36
 
 }
+#up-arrow,#down-arrow{
+  width: 3rem;
+  cursor: pointer;
+}
+#total-count{
+  font-weight: bold;
+  font-size: 16px;
+  user-select: none;
+  width: 3rem;
+}
+
+#increment-counter,#decrement-counter{
+  margin: 0;
+  width: 0;
+}
+
+
 
 </style>
 <body>
@@ -128,7 +145,7 @@ button:hover {
         </button>
       </div>
       <div class="modal-body">
-        <a href="/student/pdf/" class="fa fa-file-pdf-o" style="font-size:20px;" target="_blank">&nbsp;&nbsp;PDF</a>
+        <a href="/student/pdf/" class="fa fa-file-pdf-o"  target="_blank">&nbsp;&nbsp;PDF</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:white;">Close</button>
@@ -157,13 +174,26 @@ button:hover {
     {% endif %}
 
     {% for resume in resumes %}
-
+    
     {% if resume.diploma == None %}
+
+  
+    <div class="tab"><h5>Any Present KT</h5>
+      <div class="container-fluid">
+          <div id="increment-counter">
+            <img id="up-arrow" src="{% static 'img/up-arrow.png' %}" />
+          </div>
+          <div id="total-count"></div>
+          <div id="decrement-counter">
+            <img id="up-arrow" src="{% static 'img/down-arrow.png' %}" />
+          </div>
+      </div>
+    </div>
 
   <div class="tab"><h5>Personal Details</h5>
   <p><label for="number"><b>PRN Number :</b></label></p>
-    <p><input type="text" id="number" placeholder="PRN Number" class="input-group form-control input-lg checkvalid valid" oninput="this.className = ''" name="number" value="{{ resume.number }}" disabled></p>
-      {% if hn == "Mr." %}
+    <p><input type="text" id="number" placeholder="PRN Number" class="input-group form-control input-lg checkvalid valid" oninput="this.className = ''" name="number" value="{{ resume.prn_number }}" disabled></p>
+      {% if resume.gender|lower == "male" %}
       <p><select class="input-group form-control checkvalid" oninput="this.className = ''" name="hn">
         <option value="" disabled selected>Select Option</option>
         <option value="Mr." selected>Mr.</option>
@@ -176,11 +206,11 @@ button:hover {
         <option value="Ms." selected>Ms.</option>
       {% endif %}
     <p><label for="name"><b>Name :</b></label></p>
-    <p><input type="text" id="name" placeholder="Name" class="input-group form-control input-lg checkvalid valid" oninput="this.className = ''" name="name" value="{{ name }}"></p>
+    <p><input type="text" id="name" placeholder="Name" class="input-group form-control input-lg checkvalid valid" oninput="this.className = ''" name="name" value="{{ resume.name }}"></p>
       <p><label><b>Gender :</b></label></p>
     <div class="col-md-12" style="margin-bottom: 15px;">
       <div class="row">
-        {% if resume.gender == "Male" %}
+        {% if resume.gender|lower == "male" %}
         <div class="col-md-3 col-sm-3">
           Male
           <input type="radio" value="Male" name="gender" checked>
@@ -193,7 +223,7 @@ button:hover {
           Others
           <input type="radio" value="Others" name="gender">
         </div>
-        {% elif resume.gender == "Female" %}
+        {% elif resume.gender|lower == "female" %}
         <div class="col-md-3 col-sm-3">
           Male
           <input type="radio" value="Male" name="gender">
@@ -258,7 +288,7 @@ button:hover {
     <p><label for="addr"><b>Address :</b></label></p>
     <textarea class="checkvalid form-control rounded-0 valid" placeholder="Address" id="addr" name="address" oninput="this.className = ''">{{ resume.address }}</textarea></p>
     <p><label for="cont"><b>Contact :</b></label></p>
-    <input type="tel" placeholder="Contact" class="valid checkvalid input-group form-control input-lg" id="cont" value="{{ resume.phone }}" oninput="this.className = ''" name="phoneInput"></p>
+    <input type="tel" placeholder="Contact" class="valid checkvalid input-group form-control input-lg" id="cont" value="{{ resume.mobile_no }}" oninput="this.className = ''" name="phoneInput"></p>
     <p></p>
   </div>
 
@@ -267,67 +297,67 @@ button:hover {
     {% if resume.sem1 == None %}
       <p><label for="sem1_i"><b>Sem 1 :</b></label></p>
       <input type="text" id="sem1_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem1">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem1f" accept="image/*">
+       <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem1f" accept="image/*"> -->
     {% else %}
     <p><label for="sem1_i2"><b>Sem 1 :</b></label></p>
       <input type="text" id="sem1_i2" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem1 }}" oninput="this.className = ''" name="sem1">
-      <a href="{{ resume.sem1f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem1f" accept="image/*">
+      <!-- <a href="{{ resume.sem1f.url }}" download>View</a>
+      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem1f" accept="image/*"> -->
     {% endif %}
 
     {% if resume.sem2 == None %}
       <p><label for="sem2_i"><b>Sem 2 :</b></label></p>
       <input type="text" id="sem2_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem2">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem2f" accept="image/*">
+       <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem2f" accept="image/*"> -->
     {% else %}
     <p><label for="sem2_i2"><b>Sem 2 :</b></label></p>
       <input type="text" value="{{ resume.sem2 }}" id="sem2_i2" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem2">
-      <a href="{{ resume.sem2f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem2f" accept="image/*">
+      <!-- <a href="{{ resume.sem2f.url }}" download>View</a>
+      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem2f" accept="image/*"> -->
     {% endif %}
 
     {% if resume.sem3 == None %}
       <p><label for="sem3_i"><b>Sem 3 :</b></label></p>
       <input type="text" id="sem3_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem3">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem3f" accept="image/*">
+       <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem3f" accept="image/*"> -->
     {% else %}
     <p><label for="sem3_i2"><b>Sem 3 :</b></label></p>
       <input type="text" id="sem3_i2" value="{{ resume.sem3 }}" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem3">
-      <a href="{{ resume.sem3f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem3f" accept="image/*">
+      <!-- <a href="{{ resume.sem3f.url }}" download>View</a> -->
+      <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem3f" accept="image/*"> -->
     {% endif %}
 
     {% if resume.sem4 == None %}
       <p><label for="sem4_i"><b>Sem 4 :</b></label></p>
       <input type="text" id="sem4_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem4">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem4f" accept="image/*">
+       <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem4f" accept="image/*"> -->
     {% else %}
     <p><label for="sem4_i2"><b>Sem 4 :</b></label></p>
       <input type="text" id="sem4_i2" placeholder="Marks" value="{{ resume.sem4 }}" class="input-group form-control input-lg" oninput="this.className = ''" name="sem4">
-      <a href="{{ resume.sem4f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem4f" accept="image/*">
+      <!-- <a href="{{ resume.sem4f.url }}" download>View</a> -->
+      <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem4f" accept="image/*"> -->
     {% endif %}
 
     {% if resume.sem5 == None %}
       <p><label for="sem5_i"><b>Sem 5 :</b></label></p>
       <input type="text" id="sem5_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem5">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem5f" accept="image/*">
+       <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem5f" accept="image/*"> -->
     {% else %}
     <p><label for="sem5_i2"><b>Sem 5 :</b></label></p>
       <input type="text" id="sem5_i2" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem5 }}" oninput="this.className = ''" name="sem5">
-      <a href="{{ resume.sem5f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem5f" accept="image/*">
+      <!-- <a href="{{ resume.sem5f.url }}" download>View</a> -->
+      <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem5f" accept="image/*"> -->
     {% endif %}
 
     {% if resume.sem6 == None %}
       <p><label for="sem6_i"><b>Sem 6 :</b></label></p>
       <input type="text" id="sem6_i" placeholder="Marks" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6">
-       <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" accept="image/*">
+       <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" accept="image/*"> -->
     {% else %}
     <p><label for="sem6_i2"><b>Sem 6 :</b></label></p>
       <input type="text" id="sem6_i2" placeholder="Marks" class="input-group form-control input-lg" value="{{ resume.sem6 }}" oninput="this.className = ''" name="sem6">
-      <a href="{{ resume.sem6f.url }}" download>View</a>
-      <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" accept="image/*">
+      <!-- <a href="{{ resume.sem6f.url }}" download>View</a> -->
+      <!-- <input type="file" class="input-group form-control input-lg" oninput="this.className = ''" name="sem6f" accept="image/*"> -->
     {% endif %}
 
       <p><label for="agg"><b>Aggregate :</b></label></p>
@@ -336,6 +366,11 @@ button:hover {
     <p></p>
   </div>
 
+  <div class="tab"><h5>Any Present KT</h5>
+    <div class="container">
+
+    </div>
+  </div>
 
   <div class="tab"><h5>SSC</h5>
     <p><label for="ssc_m"><b>Marks :</b></label></p>
@@ -684,6 +719,29 @@ function validateForm() {
   }
   return valid; // return the valid status
 }
+
+var count = 0;
+
+const handleIncrement = () =>{
+  if(count>=6){
+    count =6
+  }else{
+    ++count;
+  }
+  document.getElementById('total-count').innerHTML = count
+}
+
+const handleDecrement = () =>{
+  if(count<=0){
+    count= 0;
+  }else{
+    --count;
+  }
+  document.getElementById('total-count').innerHTML = count
+}
+document.getElementById('total-count').innerHTML = count
+document.getElementById('increment-counter').addEventListener('click',handleIncrement)
+document.getElementById('decrement-counter').addEventListener('click',handleDecrement)
 
 function fixStepIndicator(n) {
   // This function removes the "active" class of all steps...

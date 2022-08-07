@@ -125,13 +125,13 @@ STATICFILES_DIRS = [
 #tnpportal7@gmail.com
 #tnpportal123
 #587
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'tnpportal.kjsieit.in'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'tnpportal7@gmail.com'
-EMAIL_HOST_PASSWORD = 'beqozzplalzbrear'
+EMAIL_PORT = 465    
+EMAIL_HOST_USER = 'pimsportal@tnpportal.kjsieit.in'
+EMAIL_HOST_PASSWORD = 'pimsportal'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
