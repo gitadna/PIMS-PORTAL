@@ -52,17 +52,17 @@
 {% if request.session.admin_type == "Super" %}
     <select name="branch" class="form-control input-lg" required>
         <option value="" selected disabled>Branch</option>
-        <option value="Information Technology">Information Technology</option>
-        <option value="Computer">Computer</option>
-        <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
-        <option value="Electronics">Electronics</option>
+        <option value="Information Technology">Information Technology Engineering</option>
+        <option value="Computer">Computer Engineering</option>
+        <option value="Electronics & Telecommunication">Electronics & Telecommunication Engineering</option>
+        <option value="Electronics">Electronics Engineering</option>
     </select>
     {% endif %}
     {% if request.session.admin_type == "Information Technology" %}
 
      <select name="branch" class="form-control input-lg" required>
         <option value="" selected disabled>Branch</option>
-        <option value="Information Technology">Information Technology</option>
+        <option value="Information Technology">Information Technology Engineering</option>
         <!-- <option value="Computer">Computer</option>
         <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
         <option value="Electronics">Electronics</option> -->
@@ -72,7 +72,7 @@
      <select name="branch" class="form-control input-lg" required>
         <option value="" selected disabled>Branch</option>
         <!-- <option value="Information Technology">Information Technology</option> -->
-         <option value="Computer">Computer</option>
+         <option value="Computer">Computer Engineering</option>
         <!-- <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
         <option value="Electronics">Electronics</option>  -->
         {% endif %}
@@ -82,7 +82,7 @@
         <option value="" selected disabled>Branch</option>
         <!-- <option value="Information Technology">Information Technology</option>
          <option value="Computer">Computer</option> -->
-        <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+        <option value="Electronics & Telecommunication">Electronics & Telecommunication Engineering</option>
         <!-- <option value="Electronics">Electronics</option> --> 
         {% endif %}
     {% if request.session.admin_type == "Electronics" %}
@@ -92,7 +92,7 @@
         <!-- <option value="Information Technology">Information Technology</option>
          <option value="Computer">Computer</option>
         <option value="Electronics & Telecommunication">Electronics & Telecommunication</option> -->
-        <option value="Electronics">Electronics</option> 
+        <option value="Electronics">Electronics Engineering</option> 
         {% endif %}
 
 <input type="submit" class="btn btn-primary" value="Add Student">

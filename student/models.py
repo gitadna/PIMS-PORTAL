@@ -35,7 +35,7 @@ class Resume(models.Model):
     agg = models.FloatField(default=0.00)
     average_CGPA = models.FloatField(default=0.00)
     ssc_marks = models.FloatField()
-    any_present_kt = models.IntegerField(max_length=111,default=0)
+    any_present_kt = models.IntegerField(default=0)
     hsc_marks = models.FloatField(blank=True, null=True)
     oneto6 = models.CharField(max_length=500)
     lock = models.BooleanField()

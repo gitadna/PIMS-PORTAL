@@ -178,17 +178,7 @@ button:hover {
     {% if resume.diploma == None %}
 
   
-    <div class="tab"><h5>Any Present KT</h5>
-      <div class="container-fluid">
-          <div id="increment-counter">
-            <img id="up-arrow" src="{% static 'img/up-arrow.png' %}" />
-          </div>
-          <div id="total-count"></div>
-          <div id="decrement-counter">
-            <img id="up-arrow" src="{% static 'img/down-arrow.png' %}" />
-          </div>
-      </div>
-    </div>
+    
 
   <div class="tab"><h5>Personal Details</h5>
   <p><label for="number"><b>PRN Number :</b></label></p>
@@ -366,10 +356,9 @@ button:hover {
     <p></p>
   </div>
 
-  <div class="tab"><h5>Any Present KT</h5>
-    <div class="container">
-
-    </div>
+  <div class="tab"><h5>Live KT</h5>
+    <p><label for="number"><b>Live KT :</b></label></p>
+  <p><input type="number" id="live_kt"  class="input-group form-control input-lg checkvalid valid" oninput="this.className = ''" name="live_kt"></p>
   </div>
 
   <div class="tab"><h5>SSC</h5>

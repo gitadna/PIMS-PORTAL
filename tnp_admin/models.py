@@ -14,7 +14,7 @@ class Admin(models.Model):
 class Company(models.Model):
     comp_name = models.CharField(max_length=100)
     comp_profile = models.CharField(max_length=100)
-    ctc = models.IntegerField()
+    ctc = models.CharField(max_length=100,default="")
     eligibility = models.FloatField()
     bond = models.CharField(max_length=100)
     date = models.DateField(auto_now=False)
