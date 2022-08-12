@@ -1,0 +1,543 @@
+ # print('no',no)
+                
+            # worksheet = wb["Sheet1"]
+            # no = 0
+            # yes = 0
+            # for i,row in enumerate(worksheet.iter_rows()):
+            #     row_data = list()
+            #     if i == 0:
+            #         continue
+            #     for cell in row:
+            #         row_data.append(str(cell.value))
+            #     excel_data.append(row_data)
+
+            # for add in excel_data:
+            #     name = add[0]
+            #     username = add[1]
+            #     branch = add[2]
+
+            #     if User.objects.filter(username=username).exists() or name == "" or username == "" or branch == "" or (not username.endswith('@somaiya.edu')):
+            #         no = no + 1
+            #     else:
+            #         password = str(''.join(random.choices(string.ascii_uppercase + string.digits, k = 8)))
+            #         addUser = User(name=name, username=username, password=password, branch=branch)
+            #         addUser.save()
+            #         send_mail(
+            #             'Placement Portal',
+            #             'Id: ' + username + '\nPassword: ' + password + '.',
+            #             'tnpportal7@gmail.com',
+            #             [username],
+            #             fail_silently=False,
+            #         )
+            #         yes = yes + 1
+            # msg = {
+            #     "yes": yes,
+            #     "no": no,
+            #     }
+
+            
+    # student_username.endswith('@somaiya.edu')
+    # print('student',excel_data)
+
+    # print('student in data',calculate_percentage(student.average_CGPA))
+
+    # print('pass',password)
+
+    # print('studne',pd.isna(student_username)) 
+
+    # print(student)
+
+    # wb = openpyxl.load_workbook(student)
+
+    # elif(admin_type=="Information Technology"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = True
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(admin_type=="Computer"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = True
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(admin_type=="Electronics & Telecommunication"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = True
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(admin_type=="Electronics"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = True
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+
+        # elif(admin_type=="Computer"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = False
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(admin_type=="Electronics & Telecommunication"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = False
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(admin_type=="Electronics"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(user=user,branch=admin_type)
+        #     resume.lock = False
+        #     resume.save()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+
+        # elif(types=="Computer"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(somaiya_id=user,branch=types)
+        #     resume.delete()
+        #     eligible = StudentsEligible.objects.filter(stud_user=user)
+        #     eligible.delete()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(types=="Electronics & Telecommunication"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(somaiya_id=user,branch=types)
+        #     resume.delete()
+        #     eligible = StudentsEligible.objects.filter(stud_user=user)
+        #     eligible.delete()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+        # elif(types=="Electronics"):
+        #     user = request.GET.get('s')
+        #     resume = Resume.objects.filter(somaiya_id=user,branch=types)
+        #     resume.delete()
+        #     eligible = StudentsEligible.objects.filter(stud_user=user)
+        #     eligible.delete()
+        #     return HttpResponseRedirect("/tnp_admin/user_display")
+
+        # context = {eligible}
+        # html = template.render(context)
+
+        # elif(admin_type=="Computer"):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics & Telecommunication" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])# elif(admin_type=="Computer"):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics & Telecommunication" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])# elif(admin_type=="Computer"):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics & Telecommunication" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])# elif(admin_type=="Computer"):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics & Telecommunication" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])# elif(admin_type=="Computer"):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics & Telecommunication" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])# elif(admin_type=="Computer"):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics & Telecommunication" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+        
+        # elif(admin_type =="Electronics" ):
+        #     filled_student_details = Resume.objects.filter(branch=admin_type).order_by('branch')
+            
+        #     response = HttpResponse(content_type='text/csv')
+            
+        #     response['Content-Disposition'] = 'attachment; filename="student_filled.csv"'
+            
+        #     writer = csv.writer(response)
+        #     writer.writerow(['Name', 'Somaiya Id', 'Branch', 'Gender', 'PRN NO.'])
+        #     for filled_student in filled_student_details:
+        #         writer.writerow([filled_student.name,
+        #         filled_student.somaiya_id,filled_student.branch,filled_student.gender,filled_student.prn_number])
+
+        # if (types == "Computer"):
+        #     # filter = request.POST['filter']
+        #     if filter == "CTC":
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        #     elif filter == "Branch":
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('branch')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        #     else:
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        # if (types == "Electronics & Telecommunication"):
+        #     # filter = request.POST['filter']
+        #     if filter == "CTC":
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        #     elif filter == "Branch":
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('branch')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        #     else:
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        # if (types == "Electronics"):
+        #     # filter = request.POST['filter']
+        #     if filter == "CTC":
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('-ctc')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        #     elif filter == "Branch":
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('branch')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+        #     else:
+        #         studentPlaced = StudentPlaced.objects.filter(branch=types).order_by('comp_name')
+        #         return render(request, 'placed_student.html', {'placed': studentPlaced, 'filter': filter})
+
+         # print('expiry age',request.session.get_expiry_age())
+            # list_of_student = {}
+            # i=0
+            # for p in stud:
+            #     list_of_student[i]['stud_name'] = p.stud_name
+            #     i+=1
+            # print(list_of_student)
+                
+            # students = StudentsEligible.objects.filter(Q(stud_user__in=mailResponse.objects.filter(stud_response=1).values('stud_user')) & Q(comp_name__in=mailResponse.objects.filter(stud_response=1).values('comp_name')))
+
+            # stud = StudentsEligible.objects.filter(Q(stud_user__in=mailResponse.objects.filter(stud_response=1).values('stud_user')) & Q(comp_name__in=mailResponse.objects.filter(stud_response=1).values('comp_name')))
+
+                # send_mail(
+                #      'Placement Portal',
+                #      'Id: ' + username + '\nPassword: ' + password + '.',
+                #      'tnpportal7@gmail.com',
+                #      [username],
+                #      fail_silently=False,
+                #  )
+# else:
+        #     msg={
+        #         'validate' : "You cannot add admin."
+        #     }
+        #     return render(request, 'add_admin.html', msg)
+
+           # send_mail(
+                #     'Welcome to Placement Information Portal \n Login //tnpportal.kjsieit.in/',
+                #     'Id: ' + username + '\nPassword: ' + password + '.',
+                #     'tnpportal7@gmail.com',
+                #      [username],
+                #      fail_silently=False,
+                #  )
+
+                 # if (admin_types=="Computer"):
+        #     resumes = Resume.objects.filter(branch=admin_types)
+        #     users = User.objects.filter(branch=admin_types)
+        #     temp = []
+        #     if resumes.count() > 0 or users.count() > 0:
+        #         for user in users:
+        #             flag = 0
+        #             for resume in resumes:
+        #                 if user.username == resume.somaiya_id:
+        #                     flag = 0
+        #                     break
+        #                 else:
+        #                     flag = 1
+        #             if flag == 1:
+        #                 temp.append(user.username)
+        #             else:
+        #                 pass
+        #         return render(request, 'display_student.html', {'userDetails': resumes, 'temp': temp, 'users': users})
+        #     elif resumes.count() == 0:
+        #         return render(request, 'display_student.html', {'users': users, 'userDetails': resumes})
+        #     else:
+        #         return render(request, 'display_student.html')
+        # if (admin_types=="Electronics & Telecommunication"):
+        #     resumes = Resume.objects.filter(branch=admin_types)
+        #     users = User.objects.filter(branch=admin_types)
+        #     temp = []
+        #     if resumes.count() > 0 or users.count() > 0:
+        #         for user in users:
+        #             flag = 0
+        #             for resume in resumes:
+        #                 if user.username == resume.somaiya_id:
+        #                     flag = 0
+        #                     break
+        #                 else:
+        #                     flag = 1
+        #             if flag == 1:
+        #                 temp.append(user.username)
+        #             else:
+        #                 pass
+        #         return render(request, 'display_student.html', {'userDetails': resumes, 'temp': temp, 'users': users})
+        #     elif resumes.count() == 0:
+        #         return render(request, 'display_student.html', {'users': users, 'userDetails': resumes})
+        #     else:
+        #         return render(request, 'display_student.html')
+        # if (admin_types=="Electronics"):
+            resumes = Resume.objects.filter(branch=admin_types)
+            users = User.objects.filter(branch=admin_types)
+            temp = []
+            if resumes.count() > 0 or users.count() > 0:
+                for user in users:
+                    flag = 0
+                    for resume in resumes:
+                        if user.username == resume.somaiya_id:
+                            flag = 0
+                            break
+                        else:
+                            flag = 1
+                    if flag == 1:
+                        temp.append(user.username)
+                    else:
+                        pass
+                return render(request, 'display_student.html', {'userDetails': resumes, 'temp': temp, 'users': users})
+            elif resumes.count() == 0:
+                return render(request, 'display_student.html', {'users': users, 'userDetails': resumes})
+            else:
+                return render(request, 'display_student.html')
+ # dir(data)
+                # print(data)
+
+                # ,admin_type=admin_type
+# admin_type=request.session['admin_type'],admin_type=admin_type
+
+
+# elif (request.session['admin_type'] == 'Computer'):
+        #     if request.method == "POST":
+        #         psw = request.POST['psw']
+        #         admin = request.session['admin_username']
+        #         admin_type=request.session['admin_type']
+        #         # ,admin_type=admin_type
+
+        #         Admin.objects.filter(username=admin,admin_type=admin_type).update(password=psw)
+        #         data = Admin.objects.filter(username=admin,admin_type=admin_type)
+
+        #         return render(request, 'adminDashb.html', {'data': data, 'msg': "Password Updated."})
+        #     else:
+        #         admin = request.session['admin_username']
+        #         admin_type=request.session['admin_type']
+
+        #         # admin_type=request.session['admin_type'],admin_type=admin_type
+        #         data = Admin.objects.filter(username=admin,admin_type=admin_type)
+        #         # dir(data)
+        #         # print(data)
+        #         return render(request, 'adminDashb.html', {'data': data})
+        # elif (request.session['admin_type'] == 'Electronics & Telecommunication'):
+        #     if request.method == "POST":
+        #         psw = request.POST['psw']
+        #         admin = request.session['admin_username']
+        #         admin_type=request.session['admin_type']
+        #         # ,admin_type=admin_type
+
+        #         Admin.objects.filter(username=admin,admin_type=admin_type).update(password=psw)
+        #         data = Admin.objects.filter(username=admin,admin_type=admin_type)
+
+        #         return render(request, 'adminDashb.html', {'data': data, 'msg': "Password Updated."})
+        #     else:
+        #         admin = request.session['admin_username']
+        #         admin_type=request.session['admin_type']
+
+        #         # admin_type=request.session['admin_type'],admin_type=admin_type
+        #         data = Admin.objects.filter(username=admin,admin_type=admin_type)
+        #         # dir(data)
+        #         # print(data)
+        #         return render(request, 'adminDashb.html', {'data': data})
+        # elif (request.session['admin_type'] == 'Electronics'):
+        #     if request.method == "POST":
+        #         psw = request.POST['psw']
+        #         admin = request.session['admin_username']
+        #         admin_type=request.session['admin_type']
+                
+
+        #         Admin.objects.filter(username=admin,admin_type=admin_type).update(password=psw)
+        #         data = Admin.objects.filter(username=admin,admin_type=admin_type)
+
+        #         return render(request, 'adminDashb.html', {'data': data, 'msg': "Password Updated."})
+        #     else:
+        #         admin = request.session['admin_username']
+        #         admin_type=request.session['admin_type']
+
+                
+        #         data = Admin.objects.filter(username=admin,admin_type=admin_type)
+               
+        #         return render(request, 'adminDashb.html', {'data': data})
